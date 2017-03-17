@@ -7,15 +7,17 @@ Modulo de defincion de class 'Entrenamiento'
 #define _CLASS_ENTRENAMIENTO_H
 
 #include <iostream>
+#include "clase.h"
 
-class Entrenamiento{
+class Entrenamiento : public Clase{
   private:
     bool enRambla;
   public:
-    DtClase(int, string, Turno);
-    int getId();
-    string getNombre();
-    Turno getTurno();
+   Entrenamiento(int,string,Turno,Inscripcion*,bool); 
+   bool getenRambla();
+   void setenRambla(bool);
+   ~Entrenamiento();
+   int cupo();
 };
 
 #endif

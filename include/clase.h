@@ -25,11 +25,36 @@ class Clase{
     int id;
     string nombre;
     Turno turno;
+    Inscripcion* inscriptos;
   public:
+    Clase(int,string,Turno,Inscripcion*);
     virtual int cupo() = 0; //se hace asi para que sea abstracta?
     int getId();
     string getNombre();
     Turno getTurno();
+    void setId(int);
+    void setNombre(string);
+    void setTurno(Turno);
+    ~Clase();
 };
+
+class DtClase{
+  private:
+    int id;
+    string nombre;
+    Turno turno;
+    Inscripcion* inscriptos;
+  public:
+    virtual int cupo() = 0; //se hace asi para que sea abstracta?
+    DtClase(int,string,Turno,Inscripcion*);
+    int getId();
+    string getNombre();
+    Turno getTurno();
+    void setId(int);
+    void setNombre(string);
+    void setTurno(Turno);
+    ~DtClase();
+};
+
 
 #endif

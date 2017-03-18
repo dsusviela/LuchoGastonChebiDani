@@ -10,6 +10,7 @@ Se agrega el DataType Fecha al archivop ya que esd el unico modulo que lo utilza
 
 #include "socio.h"
 
+//queda igual porque no tiene dtype asociado
 class Inscripcion {
   private:
     Fecha fecha;

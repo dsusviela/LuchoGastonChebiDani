@@ -13,12 +13,22 @@ Modulo de defincion de class 'Entrenamiento' y su respectivo DataType
 
 class Entrenamiento : public Clase{
   private:
+    DtEntrenamiento entrenamiento; //no se me ocurre otro nombre
+  public:
+    Entrenamiento(DtEntrenamiento);
+    void setEntrenamiento(DtEntrenamiento);
+    DtEntrenamiento getEntrenamiento();
+    ~Entrenamiento();
+}
+
+class DtEntrenamiento : public DtClase{
+  private:
     bool enRambla;
   public:
-   Entrenamiento(int,string,Turno,Inscripcion*,bool); //id, nombre, turno, enRambla
+   DtEntrenamiento(int,string,Turno,Inscripcion*,bool); //id, nombre, turno, enRambla
    bool getenRambla();
    void setenRambla(bool);
-   ~Entrenamiento();
+   ~DtEntrenamiento();
    virtual int cupo(); //se pone virtual para que quede claro que es la funcion abstracta
                        //de la class Clase, padre de esta
                        //http://stackoverflow.com/questions/4895294/c-virtual-keyword-for-functions-in-derived-classes-is-it-necessary

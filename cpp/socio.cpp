@@ -8,13 +8,13 @@ Modulo de implementacion de class 'Socio'
 #include "../include/socio.h"
 
 /*Constructor por defecto*/
-Socio::Socio(){
+DtSocio::DtSocio(){
   this->CI = 0;
   this->nombre = "nombre";
 }
 
 /*Constructor por parametro*/
-Socio::Socio(int cedula, string name){
+DtSocio::DtSocio(int cedula, string name){
   this->CI = cedula;
   this->nombre = name;
 }
@@ -30,22 +30,22 @@ memoria dinámica (si el objeto a destruir la utiliza)."
 
 De aca entiendo que si no hay memoria dinamica en la class no preciso definir el destructor,
 osea que su codigo esta vaico y no hay nada que hacer aca adentro*/
-Socio::~Socio(){}
+DtSocio::~DtSocio(){}
 
  /*Getters*/
-int getCI::Socio(){
+int getCI::DtSocio(){
   return this->CI;
 }
 
-string getnombre::Socio(){
+string getnombre::DtSocio(){
   return this->nombre;
 }
 
 /*Setters*/
-void setCI::Socio(int cedula){
+void setCI::DtSocio(int cedula){
   this->CI = cedula;
 }
 
-void setnombre::Socio(string name){
+void setnombre::DtSocio(string name){
   this->nombre = name;
 }

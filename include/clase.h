@@ -24,23 +24,17 @@ enum Turno {Manana, Tarde, Noche};
 
 /*
 defincion de la class clase
-le puse todas las cosas que estaban en el diagrama, no hay que llamar al datatype
+Aca se llama al DataType para el contenido de la class.
+La class tiene un solo parametro, su datatype, los datos se manejan ahi
 */
 class Clase{
   private:
-    int id;
-    string nombre;
-    Turno turno;
-    Inscripcion* inscriptos;
+    DtClase clase; //no se me ocurre otro nombre
   public:
-    Clase(int,string,Turno,Inscripcion*);
-    virtual int cupo() = 0; //se hace asi para que sea abstracta?
-    int getId();
-    string getNombre();
-    Turno getTurno();
-    void setId(int);
-    void setNombre(string);
-    void setTurno(Turno);
+    Clase(DtClase);
+    virtual int cupo() = 0; //lo pongo por la foto la verdad
+    DtClase getClase();
+    void setClase(DtClase);
     ~Clase();
 };
 

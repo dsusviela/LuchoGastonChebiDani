@@ -14,11 +14,10 @@ Se define ademas el enumerado Turno aca ya que es el unico que la utiliza (los h
 #include <iostream>
 
 #include "inscripcion.h"
-//#include "../include/cola.hpp" Ejemplo de include en otro directorio
 
 /*
 como clase es la unica class que usa turno me parece al re pedo hacerle
-suu propio .h
+su propio .h
 */
 
 enum Turno {Manana, Tarde, Noche};

@@ -9,6 +9,9 @@ Modulo de defincion de class 'Clase'
 #include <string> //http://stackoverflow.com/questions/4103169/how-do-i-include-the-string-header
 #include <iostream>
 
+#include "inscripcion.h"
+//#include "../include/cola.hpp" Ejemplo de include en otro directorio
+
 /*
 como clase es la unica class que usa turno me parece al re pedo hacerle
 suu propio .h

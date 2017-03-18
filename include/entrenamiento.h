@@ -9,11 +9,13 @@ Modulo de defincion de class 'Entrenamiento'
 #include <iostream>
 #include "clase.h"
 
+#include "clase.h"
+
 class Entrenamiento : public Clase{
   private:
     bool enRambla;
   public:
-   Entrenamiento(int,string,Turno,Inscripcion*,bool); 
+   Entrenamiento(int,string,Turno,Inscripcion*,bool); //id, nombre, turno, enRambla
    bool getenRambla();
    void setenRambla(bool);
    ~Entrenamiento();

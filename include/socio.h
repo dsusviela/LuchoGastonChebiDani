@@ -1,5 +1,5 @@
 /*
-Modulo de defincion de class 'Socio'
+Modulo de defincion de class 'Socio' y su respectivo DataType
 */
 
 //previene declarar dos veces las cosas por multiples includes de este .h

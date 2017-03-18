@@ -1,5 +1,5 @@
 /*
-Modulo de defincion de class 'Spinning'
+Modulo de defincion de class 'Spinning' y su respectivo DataType
 */
 
 //previene declarar dos veces las cosas por multiples includes de este .h
@@ -19,7 +19,9 @@ class Spinning : public Clase{
    int getcantBicicletas();
    void setecantBicicletas(int);
    ~Spinning();
-   int cupo();
+   virtual int cupo();//se pone virtual para que quede claro que es la funcion abstracta
+                       //de la class Clase, padre de esta
+                       //http://stackoverflow.com/questions/4895294/c-virtual-keyword-for-functions-in-derived-classes-is-it-necessary
 };
 
 #endif

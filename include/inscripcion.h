@@ -1,5 +1,7 @@
 /*
-Modulo de defincion de class 'Inscripcion'
+Modulo de defincion de class 'Inscripcion', no lleva DataType asociado
+
+Se agrega el DataType Fecha al archivop ya que esd el unico modulo que lo utilza
 */
 
 //previene declarar dos veces las cosas por multiples includes de este .h

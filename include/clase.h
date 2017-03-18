@@ -1,5 +1,9 @@
 /*
-Modulo de defincion de class 'Clase'
+Modulo de defincion de class 'Clase' y su respectivo DataType
+
+Se define ademas el enumerado Turno aca ya que es el unico que la utiliza (los hijos de la class 'Clase'
+                                                                            hacen include de este archivo)
+
 */
 
 //previene declarar dos veces las cosas por multiples includes de este .h
@@ -48,7 +52,7 @@ class DtClase{
     Turno turno;
     Inscripcion* inscriptos;
   public:
-    virtual int cupo() = 0; //se hace asi para que sea abstracta?
+    virtual int cupo() = 0;
     DtClase(int,string,Turno,Inscripcion*);
     int getId();
     string getNombre();

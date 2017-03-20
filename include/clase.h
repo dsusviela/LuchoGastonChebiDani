@@ -43,16 +43,18 @@ class DtClase{
     int id;
     string nombre;
     Turno turno;
-    Inscripcion* inscriptos;
+    Inscripcion** inscriptos;
   public:
     virtual int cupo() = 0;
     DtClase(int,string,Turno,Inscripcion*);
     int getId();
     string getNombre();
     Turno getTurno();
+    Inscripccion **getInscripcion();
     void setId(int);
     void setNombre(string);
     void setTurno(Turno);
+    void setInscripcion(Inscripcion **);
     ~DtClase();
 };
 

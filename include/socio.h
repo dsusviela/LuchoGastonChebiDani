@@ -13,6 +13,7 @@ class Socio{
   private:
     DtSocio socio;
   public:
+    Socio();
     Socio(DtSocio);
     DtSocio getSocio();
     void setSocio(DtSocio);

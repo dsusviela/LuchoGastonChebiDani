@@ -25,7 +25,7 @@ class DtEntrenamiento : public DtClase{
   private:
     bool enRambla;
   public:
-   DtEntrenamiento(int,string,Turno,Inscripcion*,bool); //id, nombre, turno, enRambla
+   DtEntrenamiento(int, int, string, Turno, Inscripcion**, bool = false); //id, nombre, turno, enRambla
    bool getenRambla();
    void setenRambla(bool);
    ~DtEntrenamiento();

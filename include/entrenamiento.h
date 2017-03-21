@@ -9,8 +9,6 @@ Modulo de defincion de class 'Entrenamiento' y su respectivo DataType
 #include <iostream>
 #include "clase.h"
 
-#include "clase.h"
-
 class Entrenamiento : public Clase{
   private:
     DtEntrenamiento entrenamiento; //no se me ocurre otro nombre

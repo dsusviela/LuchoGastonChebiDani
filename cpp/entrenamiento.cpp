@@ -9,13 +9,18 @@ Modulo de implementacion de class 'Entrenamiento'
 #include <iostream>
 #include "../include/entrenamiento.h"
 
-DtEntrenamiento::DtEntrenamiento(){
-    enRambla = false;
+DtEntrenamiento::DtEntrenamiento(bool r){
+    clase = DtClase();
+    enRambla = r;
 }
 
-DtEntrenamiento::DtEntrenamiento(DtClase info_clase, bool rambla){
-    clase = info_clase;
-    enRambla = rambla;
+DtEntrenamiento::DtEntrenamiento(int i, int a, string n, Turno t, Inscripcion** inscrip, bool r){
+    id = i;
+    anotados = a;
+    nombre = n
+    turno = t;
+    incripcion = inscrip;
+    enRambla = r;
 }
 
 bool DtEntrenamiento::getenRambla(){
@@ -45,14 +50,8 @@ void Entrenamiento::setEntrenamiento(DtEntrenamiento info_entrenamiento){
 }
 
 int Entrenamiento::cupo(){
-    int res, i;
-    i = res = 0;
-    while(i<=50){
-        if (getInscripcion(getClase(entrenamiento))[i] != NULL){ res++ }
-        i++;
-    }
-        
-    return res;
+    if (enRambla) return 20-anotados;
+    else return 10-anotados;
 }
 
 //no se precisa el destructor

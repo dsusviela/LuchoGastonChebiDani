@@ -46,7 +46,7 @@ void DtSpinning::setcantBicicletas(int cant){
 }
 
 int DtSpinning::cupo(){
-//ALGO
+  return cantBicicletas-anotados;
 }
 
 /*MONITOREO*/

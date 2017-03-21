@@ -13,7 +13,7 @@ class Entrenamiento : public Clase{
   private:
     DtEntrenamiento entrenamiento; //no se me ocurre otro nombre
   public:
-    Entrenamiento(DtEntrenamiento);
+    Entrenamiento(DtEntrenamiento, bool = false);
     void setEntrenamiento(DtEntrenamiento);
     DtEntrenamiento getEntrenamiento();
     ~Entrenamiento();

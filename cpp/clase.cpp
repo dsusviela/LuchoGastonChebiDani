@@ -29,13 +29,15 @@ void Clase::setClase(DtClase clase_ains){
 
 DtClase::DtClase(){
     id = 0;
+    anotados = 0;
     nombre = "nombre"
     turno = Manana;
     inscriptos = new Inscripcion *[50];
 }
 
-DtClase::DtClase(int cedula, string name, Turno horario, Inscripcion** array_inscriptos){
+DtClase::DtClase(int cedula, int a, string name, Turno horario, Inscripcion** array_inscriptos){
     id = cedula;
+    anotados = a;
     nombre = name;
     turno = horario;
     inscriptos = array_inscriptos;
@@ -43,6 +45,10 @@ DtClase::DtClase(int cedula, string name, Turno horario, Inscripcion** array_ins
 
 int DtClase::getId(){
     return id;
+}
+
+int DtClase::getAnotados(){
+    return anotados;
 }
 
 string DtClase::getNombre(){

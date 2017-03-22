@@ -24,7 +24,7 @@ Modulo de implementacion de principal.cpp
 struct nodo_clases{
   Clase *info_clase;
   bool es_entrenamiento;
-}
+};
 
 Socio *arreglo_socios[MAX_SOCIOS];
 int tope_socios = 0;
@@ -36,7 +36,7 @@ int tope_clases = 0;
 static bool existe_socio(int ci) {
   bool encontre = false;
   int i = 0;
-  while(i < tope_socios && encontre = false) {
+  while(i < tope_socios && encontre == false) {
     if(arreglo_socios[i]->getCI() == ci){
       encontre = true;
     }
@@ -45,7 +45,7 @@ static bool existe_socio(int ci) {
   return encontre;
 }
 
-void agregarSocio(int ci, string nombre){                               //1
+void agregarSocio(int ci, std::string nombre){                               //1
   arreglo_socios[tope_socios] = Socio(ci, nombre);
   tope_socios++;
 }
@@ -53,8 +53,8 @@ void agregarSocio(int ci, string nombre){                               //1
 static bool existe_clase(DtClase &clase){
   bool encontre = false;
   int i = 0;
-  while(i < tope_clases && encontre = false){
-    if(arreglo_clases[i].info_clase->getId()){
+  while(i < tope_clases && encontre == false){
+    if(arreglo_clases[i]->info_clase->getId()){
       encontre = true;
     }
     i++;
@@ -63,7 +63,7 @@ static bool existe_clase(DtClase &clase){
 }
 
 static void agregarSpinning(const DtSpinning &clase_spinning){
-  arreglo_clases[tope_clases].info_clase = *Spinning(clase_spinning.getId(),
+  arreglo_clases[tope_clases]->info_clase = *Spinning(clase_spinning.getId(),
                                                     clase_spinning.getAnotados(),
                                                     clase_spinning.getNombre(),
                                                     clase_spinning.getTurno(),

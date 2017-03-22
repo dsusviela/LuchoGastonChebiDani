@@ -21,13 +21,14 @@ class DtClase{
     int anotados;
     string nombre;
     Turno turno;
-    Inscripcion* inscriptos;
+    Inscripcion* incripciones[50];
   public:
     DtClase(int, string, Turno, Inscripcion*);
     int getId();
     int getAnotados;
     string getNombre();
     Turno getTurno();
+    Inscripcion* getInscripciones();
     void setId(int);
     void setNombre(string);
     void setTurno(Turno);

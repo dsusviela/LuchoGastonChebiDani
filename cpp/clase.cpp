@@ -10,7 +10,7 @@ Modulo de implementacion de class 'Clase'
 #include "../include/inscripcion.h"
 
 int Clase::getId(){
-	return this->id;
+  return this->id;
 }
 
 int Clase::getAnotados() {
@@ -18,53 +18,28 @@ int Clase::getAnotados() {
 }
 
 string Clase::getNombre(){
-	return this->nombre;
+  return this->nombre;
 }
 
 Turno Clase::getTurno(){
-	return this->turno;
+  return this->turno;
 }
 
+Inscripcion* getInscripciones(){
+  //no se como implementarla
+}
+
+
 void Clase::setId(int x){
-	this->id = x;
+  this->id = x;
 }
 
 void Clase::setNombre(string s){
-	this->nombre = s;
+  this->nombre = s;
 }
 
 void Clase::setTurno(Turno t){
-	this->turno = t;
+  this->turno = t;
 }
 
 Clase::~Clase(){};
-
-int DtClase::getId(){
-	return this->id;
-}
-
-int DtClase::getAnotados(){
-  return this->anotados;
-}
-
-string DtClase::getNombre(){
-	return this->nombre;
-}
-
-Turno DtClase::getTurno(){
-	return this->turno;
-}
-
-void DtClase::setId(int x){
-	this->id = x;
-}
-
-void DtClase::setNombre(string s){
-	this->nombre = s;
-}
-
-void DtClase::setTurno(Turno t){
-	this->turno = t;
-}
-
-DtClase::~DtClase(){};

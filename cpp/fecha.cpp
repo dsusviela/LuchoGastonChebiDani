@@ -1,7 +1,8 @@
 /*
 Modulo de implementacion de DataType 'Fecha'
 */
-#include <string> //http://stackoverflow.com/questions/4103169/how-do-i-include-the-string-header
+
+#include <string>
 #include <iostream>
 
 #include "../include/fecha.h/"
@@ -20,25 +21,25 @@ Fecha::Fecha(int dia,int mes,int anio){
 }
 
 int Fecha::getDia(){
-	return this->dia
+	return this->dia;
 }
 
 int Fecha::getMes(){
-	return this->mes
+	return this->mes;
 }
 
 int Fecha::getAnio(){
-	return this->anio
+	return this->anio;
 }
 
 void Fecha::setDia(int d){
-	this->dia = d
+	this->dia = d;
 }
 
 void Fecha::setMes(int m){
-	this->mes = m
+	this->mes = m;
 }
 
 void Fecha::setAnio(int a){
-	this->anio = a
+	this->anio = a;
 }

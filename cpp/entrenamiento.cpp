@@ -18,33 +18,17 @@ Entrenamiento::Entrenamiento(int x,string s,Turno t,Inscripcion *i,bool b){
 }
 
 bool Entrenamiento::getenRambla(){
-	return this->enRambla
+	return this->enRambla;
 }
 
 void Entrenamiento::setenRambla(bool b){
-	this->enRambla = b
-}
-
-int Entrenamiento :: cupo(){
-	//ALGO
-}
-
-DtEntrenamiento::DtEntrenamiento(int x,string s,Turno t,Inscripcion *i,bool b){
-	this->id = x;
-	this->nombre = s;
-	this->turno = t;
-	//this->inscriptos = i ?
 	this->enRambla = b;
 }
 
-bool DtEntrenamiento::getenRambla(){
-	return this->enRambla
+int Entrenamiento :: cupo(){
+	if (enRambla)
+	  return 20-anotados;
+	else
+	  return 10-anotados;
 }
 
-void DtEntrenamiento::setenRambla(bool b){
-	this->enRambla = b
-}
-
-int Entrenamiento::cupo(){
-	//ALGO
-}

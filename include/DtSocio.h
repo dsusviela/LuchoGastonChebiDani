@@ -1,8 +1,5 @@
 /*
- * DtSocio.h
- *
- *  Created on: Mar 22, 2017
- *      Author: Chebi
+ * Modulo de definicion de 'DtSocio'
  */
 
 #ifndef INCLUDE_DTSOCIO_H_

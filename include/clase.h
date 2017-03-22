@@ -19,11 +19,6 @@ Se define ademas el enumerado Turno aca ya que es el unico que la utiliza (los h
 using namespace std;
 
 /*
-como clase es la unica class que usa turno me parece al re pedo hacerle
-su propio .h
-*/
-
-/*
 defincion de la class clase
 le puse todas las cosas que estaban en el diagrama, no hay que llamar al datatype
 */
@@ -33,7 +28,7 @@ class Clase{
     int anotados;
     string nombre;
     Turno turno;
-    Inscripcion* inscriptos[50];
+    Inscripcion* inscripciones[50];
   public:
     Clase(int, string, Turno, Inscripcion*);
     virtual int cupo() = 0; //se hace asi para que sea abstracta?
@@ -41,6 +36,7 @@ class Clase{
     int getAnotados;
     string getNombre();
     Turno getTurno();
+    Inscripcion* getInscripciones();
     void setId(int);
     void setNombre(string);
     void setTurno(Turno);

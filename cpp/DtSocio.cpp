@@ -1,39 +1,40 @@
 /*
-Modulo de implementacion de class 'Socio'
-*/
+ * Modulo de implementacion de datatype 'DtSocio'
+ */
 
 #include <iostream>
 #include <string>
 
-#include "../include/socio.h"
+#include "../include/DtSocio.h"
 
 /*Constructor por defecto*/
-Socio::Socio(){
+DtSocio::DtSocio(){
   this->CI = 0;
   this->nombre = "nombre";
 }
 
 /*Constructor por parametro*/
-Socio::Socio(int cedula, string name){
+DtSocio::DtSocio(int cedula, string name){
   this->CI = cedula;
   this->nombre = name;
 }
 
 
  /*Getters*/
-int Socio::getCI(){
+int DtSocio::getCI(){
   return this->CI;
 }
 
-string Socio::getNombre(){
+string DtSocio::getNombre(){
   return this->nombre;
 }
 
 /*Setters*/
-void Socio::setCI(int cedula){
+void DtSocio::setCI(int cedula){
   this->CI = cedula;
 }
 
-void Socio::setNombre(string name){
+void DtSocio::setNombre(string name){
   this->nombre = name;
 }
+

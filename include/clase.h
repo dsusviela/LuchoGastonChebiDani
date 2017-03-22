@@ -14,6 +14,7 @@ Se define ademas el enumerado Turno aca ya que es el unico que la utiliza (los h
 #include <iostream>
 
 #include "inscripcion.h"
+#include "turno.h"
 
 using namespace std;
 
@@ -21,8 +22,6 @@ using namespace std;
 como clase es la unica class que usa turno me parece al re pedo hacerle
 su propio .h
 */
-
-enum Turno {Manana, Tarde, Noche};
 
 /*
 defincion de la class clase
@@ -36,7 +35,7 @@ class Clase{
     Turno turno;
     Inscripcion* inscriptos[50];
   public:
-    Clase(int,string,Turno,Inscripcion*);
+    Clase(int, string, Turno, Inscripcion*);
     virtual int cupo() = 0; //se hace asi para que sea abstracta?
     int getId();
     int getAnotados;
@@ -46,26 +45,6 @@ class Clase{
     void setNombre(string);
     void setTurno(Turno);
     virtual ~Clase();
-};
-
-class DtClase{
-  private:
-    int id;
-    int anotados;
-    string nombre;
-    Turno turno;
-    Inscripcion* inscriptos;
-  public:
-    virtual int cupo() = 0;
-    DtClase(int,string,Turno,Inscripcion*);
-    int getId();
-    int getAnotados;
-    string getNombre();
-    Turno getTurno();
-    void setId(int);
-    void setNombre(string);
-    void setTurno(Turno);
-    virtual ~DtClase();
 };
 
 

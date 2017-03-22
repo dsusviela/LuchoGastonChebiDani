@@ -14,7 +14,7 @@ using namespace std;
 class Socio {
   private:
     int CI;
-    stirng nombre;
+    string nombre;
   public:
     Socio(); //no debería declararse esto acá?
     Socio(int, string); //CI, nombre
@@ -22,7 +22,6 @@ class Socio {
     string getNombre();
     void setCI(int);
     void setNombre(string);
-    ~Socio();
-}
+};
 
 #endif

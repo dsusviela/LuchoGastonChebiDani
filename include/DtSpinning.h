@@ -1,28 +1,27 @@
 /*
-Modulo de defincion de class 'Spinning' y su respectivo DataType
+Modulo de defincion de DtSpinning
 */
 
 //previene declarar dos veces las cosas por multiples includes de este .h
-#ifndef _CLASS_SPINNING_H
-#define _CLASS_SPINNING_H
+#ifndef _CLASS_DTSPINNING_H
+#define _CLASS_DTSPINNING_H
 
 #include <iostream>
 #include <string>
 
-#include "clase.h"
+#include "DtClase.h"
 
 using namespace std;
 
-class Spinning : public Clase{
+class DtSpinning : public DtClase{
   private:
     int cantBicicletas;
   public:
-    Spinning(int,string,Turno,Inscripcion*,int); //id, nombre, turno, cantidad
+    DtSpinning(int,string,Turno,Inscripcion*,int); //id, nombre, turno, cantidad
     int getcantBicicletas();
     void setcantBicicletas(int);
-    ~Spinning();
+    ~DtSpinning();
     virtual int cupo();
 };
 
-
-#endif;
+#endif

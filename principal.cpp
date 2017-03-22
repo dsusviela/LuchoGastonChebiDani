@@ -4,7 +4,7 @@ Modulo de implementacion de principal.cpp
 
 #include "include/clase.h"
 #include "include/entrenamiento.h"
-#include "include/fecha.h/"
+#include "include/fecha.h"
 #include "include/inscripcion.h"
 #include "include/socio.h"
 #include "include/spinning.h"
@@ -21,11 +21,12 @@ int tope_clases = 0;
 static bool existe_socio(int ci) {
     bool encontre = false;
     int i = 0;
-    while(i < tope_socios && encontre = false) {
-        if(arreglo_socios[i]->getId() == ci)
+    while(i < tope_socios && encontre == false) {
+        if(arreglo_socios[i]->getCI() == ci)
             encontre = true;
         i++;
     }
+    return encontre;
 }
 
 void agregarSocio(int ci, string nombre){
@@ -34,7 +35,7 @@ void agregarSocio(int ci, string nombre){
 }
 
 
-int main{
+int main(){
 
 
 

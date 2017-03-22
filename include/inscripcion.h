@@ -20,6 +20,6 @@ class Inscripcion {
     Inscripcion(Fecha,socio*);
     Fecha getFecha();
     void setFecha(Fecha);
-}
+};
 
 #endif

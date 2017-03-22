@@ -2,6 +2,13 @@
 Modulo de implementacion de principal.cpp
 */
 
+#include "../include/clase.h"
+#include "../include/entrenamiento.h"
+#include "../include/fecha.h/"
+#include "../include/inscripcion.h"
+#include "../include/socio.h"
+#include "../include/spinning.h"
+
 #define MAX_SOCIOS 1000
 #define MAX_CLASES 500
 
@@ -28,8 +35,8 @@ void agregarSocio(int ci, string nombre){
 
 
 int main{
-    
 
-    
+
+
 return 0;
 }

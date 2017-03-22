@@ -4,9 +4,9 @@ Modulo de implementacion de class 'Spinning'
 #include <string> //http://stackoverflow.com/questions/4103169/how-do-i-include-the-string-header
 #include <iostream>
 
-#include "inscripcion.h"
-#include "clase.h"
-#include "spinning.h"
+#include "../include/clase.h"
+#include "../include/inscripcion.h"
+#include "../include/spinning.h"
 
 Spinning::Spinning(int id,string s,Turno t,Inscripcion *i,int cant){
 	this->id = id;

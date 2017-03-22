@@ -6,8 +6,8 @@ Modulo de implementacion de class 'Clase'
 #include <string> //http://stackoverflow.com/questions/4103169/how-do-i-include-the-string-header
 #include <iostream>
 
-#include "inscripcion.h"
-#include "clase.h"
+#include "../include/clase.h"
+#include "../include/inscripcion.h"
 
 int Clase::getId(){
 	return this->id;

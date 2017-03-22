@@ -5,9 +5,9 @@ Modulo de implementacion de class 'Entrenamiento'
 #include <string> //http://stackoverflow.com/questions/4103169/how-do-i-include-the-string-header
 #include <iostream>
 
-#include "inscripcion.h"
-#include "clase.h"
-#include "entrenamiento.h"
+#include "../include/clase.h"
+#include "../include/entrenamiento.h"
+#include "../include/inscripcion.h"
 
 Entrenamiento::Entrenamiento(int x,string s,Turno t,Inscripcion *i,bool b){
 	this->id = x;
@@ -24,10 +24,10 @@ bool Entrenamiento::getenRambla(){
 void Entrenamiento::setenRambla(bool b){
 	this->enRambla = b
 }
-   
+
 int Entrenamiento :: cupo(){
 	//ALGO
-} 
+}
 
 DtEntrenamiento::DtEntrenamiento(int x,string s,Turno t,Inscripcion *i,bool b){
 	this->id = x;
@@ -44,7 +44,7 @@ bool DtEntrenamiento::getenRambla(){
 void DtEntrenamiento::setenRambla(bool b){
 	this->enRambla = b
 }
-   
+
 int Entrenamiento::cupo(){
 	//ALGO
 }

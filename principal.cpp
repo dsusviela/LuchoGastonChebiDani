@@ -21,10 +21,10 @@ Modulo de implementacion de principal.cpp
 #define MAX_SOCIOS 1000
 #define MAX_CLASES 500
 
-Socio* arreglo_socios[MAX_SOCIOS];
+Socio *arreglo_socios[MAX_SOCIOS];
 int tope_socios = 0;
 
-Clase* arreglo_clases[MAX_CLASES];
+Clase *arreglo_clases[MAX_CLASES];
 int tope_clases = 0;
 
 //funciones a implementar con sus axuliares
@@ -57,8 +57,23 @@ static bool existe_clase(DtClase &clase){
   return encontre;
 }
 
-void agregarClase(DtClase &clase){                                      //2
- //algo
+static void agregarSpinning(const DtSpinning &clase_spinning){
+  arreglo_clases[tope_clases] = Spinning(clase_spinning.getId(),
+                                         clase_spinning.getAnotados(),
+                                         clase_spinning.getNombre(),
+                                         clase_spinning.getTurno(),
+                                         clase_spinning.getcantBicicletas());
+}
+
+static void agregarEntrenamiento(const DtSpinning &clase_entrenamiento){
+  arreglo_clases[tope_clases] = Spinning(clase_entrenamiento.getId(),
+                                         clase_entrenamiento.getAnotados(),
+                                         clase_entrenamiento.getNombre(),
+                                         clase_entrenamiento.getTurno(),
+                                         clase_entrenamiento.getenRambla());
+}
+void agregarClase(const DtClase &clase){                                //2
+ tope_clases++;
 }
 
 void agregarInscripcion(int ciSocio, int idClase, Fecha fecha){         //3
@@ -129,7 +144,10 @@ int main(){
 
           DtClase *clase_spinning_ains = new DtSpinning(identificacion_spinning, nombre_clase_spinning
                                                         turno_clase_spinning, cantidad_bicicletas);
+          agregarSpinning(clase_spinning_ains);
           agregarClase(clase_spinning_ains);
+
+          std::cout << "Clase ingresada exitosamente. \n";
 
         } catch(const std::invalid_argument &ia) {responder_entrada_invalida(entrada)};
         break;

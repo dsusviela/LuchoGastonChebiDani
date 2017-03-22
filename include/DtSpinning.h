@@ -16,7 +16,7 @@ class DtSpinning : public DtClase{
   private:
     int cantBicicletas;
   public:
-    DtSpinning(int,std::string,Turno,Inscripcion*,int); //id, nombre, turno, cantidad
+    DtSpinning(int,std::string,Turno,Inscripcion*,int); //id, nombre, turno, quienes, cantidad
     int getcantBicicletas();
     void setcantBicicletas(int);
     ~DtSpinning();

@@ -10,13 +10,13 @@ Se define ademas el enumerado Turno aca ya que es el unico que la utiliza (los h
 #ifndef _CLASS_CLASE_H
 #define _CLASS_CLASE_H
 
-#include <string> //http://stackoverflow.com/questions/4103169/how-do-i-include-the-string-header
+#include <string> //http://stackoverflow.com/questions/4103169/how-do-i-include-the-std::string-header
 #include <iostream>
 
 #include "inscripcion.h"
 #include "turno.h"
+#include "DtClase.h"
 
-using namespace std;
 
 /*
 defincion de la class clase
@@ -26,20 +26,22 @@ class Clase{
   private:
     int id;
     int anotados;
-    string nombre;
+    std::string nombre;
     Turno turno;
     Inscripcion* inscripciones[50];
   public:
-    Clase(int, string, Turno, Inscripcion*);
+    Clase(int, std::string, Turno, Inscripcion*);
     virtual int cupo() = 0; //se hace asi para que sea abstracta?
     int getId();
-    int getAnotados;
-    string getNombre();
+    int getAnotados();
+    std::string getNombre();
     Turno getTurno();
     Inscripcion* getInscripciones();
+    DtClase getData();
     void setId(int);
-    void setNombre(string);
+    void setNombre(std::string);
     void setTurno(Turno);
+    void agregarInscripcion(Inscripcion);
     virtual ~Clase();
 };
 

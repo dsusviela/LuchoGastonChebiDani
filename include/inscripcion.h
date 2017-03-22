@@ -7,13 +7,14 @@ Modulo de defincion de class 'Inscripcion'
 #define _CLASS_INSCRIPCION_H
 
 #include "socio.h"
+#include "DtSocio.h"
+#include "fecha.h"
 
-using namespace std;
 
 class Inscripcion {
   private:
     Fecha fecha;
-    Socio *socio; //pseudo atributo
+    Socio *socio;
   public:
     Inscripcion(Fecha, socio *);
     Fecha getFecha();

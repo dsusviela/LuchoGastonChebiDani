@@ -12,28 +12,27 @@ Modulo de defincion de datatype 'DtClase'
 #include "inscripcion.h"
 #include "turno.h"
 
-using namespace std;
-
 
 class DtClase{
   private:
     int id;
     int anotados;
-    string nombre;
+    std::string nombre;
     Turno turno;
     Inscripcion* incripciones[50];
   public:
-    DtClase(int, string, Turno, Inscripcion*);
+    DtClase(int = 1, int = 0, std::string = "nombre no inicializado",
+        Turno = Manana);
+    DtClase(int, int, std::string, Turno, Inscripcion*);
     int getId();
-    int getAnotados;
-    string getNombre();
+    int getAnotados();
+    std::string getNombre();
     Turno getTurno();
     Inscripcion* getInscripciones();
     void setId(int);
-    void setNombre(string);
+    void setNombre(std::string);
     void setTurno(Turno);
     virtual ~DtClase();
-    virtual void abstractfn() = 0;
 };
 
 #endif

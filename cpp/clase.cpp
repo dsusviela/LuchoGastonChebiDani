@@ -9,15 +9,16 @@ Modulo de implementacion de class 'Clase'
 #include "../include/clase.h"
 #include "../include/inscripcion.h"
 
+/* Getters */
 int Clase::getId(){
   return this->id;
 }
 
-int Clase::getAnotados() {
+int Clase::getAnotados(){
   return this->anotados;
 }
 
-string Clase::getNombre(){
+std::string Clase::getNombre(){
   return this->nombre;
 }
 
@@ -29,12 +30,16 @@ Inscripcion* getInscripciones(){
   //no se como implementarla
 }
 
+DtClase Clase::getData(){
 
+}
+
+/* Setters*/
 void Clase::setId(int x){
   this->id = x;
 }
 
-void Clase::setNombre(string s){
+void Clase::setNombre(std::string s){
   this->nombre = s;
 }
 
@@ -42,4 +47,11 @@ void Clase::setTurno(Turno t){
   this->turno = t;
 }
 
+/* Funcionalidad */
+void Clase::agregarInscripcion(Inscripcion inscrip) {
+  this->inscripciones[this->anotados] = inscrip;
+  this->anotados++;
+}
+
+/* Destructor */
 Clase::~Clase(){};

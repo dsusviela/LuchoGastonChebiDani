@@ -9,8 +9,9 @@
 #include "../include/DtEntrenamiento.h"
 #include "../include/inscripcion.h"
 
-DtEntrenamiento::DtEntrenamiento(int x, string s, Turno t, Inscripcion *i, bool b){
+DtEntrenamiento::DtEntrenamiento(int x, int a, std::string s, Turno t, bool b){
     this->id = x;
+    this->anotados = a;
     this->nombre = s;
     this->turno = t;
     //this->inscriptos = i ?

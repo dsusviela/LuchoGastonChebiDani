@@ -8,11 +8,11 @@ Modulo de implementacion de class 'Spinning'
 #include "../include/inscripcion.h"
 #include "../include/spinning.h"
 
-Spinning::Spinning(int id,string s,Turno t,Inscripcion *i,int cant){
-	this->id = id;
+Spinning::Spinning(int i, int a, string s, Turno t, int cant){
+	this->id = i;
+	this->anotados = a;
 	this->nombre = s;
 	this->turno = t;
-	//this->inscriptos = i;
 	this->cantBicicletas = cant;
 }
 

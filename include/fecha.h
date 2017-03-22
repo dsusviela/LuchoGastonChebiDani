@@ -6,24 +6,18 @@ Modulo de defincion de DataTpe 'Fecha'
 #ifndef _CLASS_FECHA_H
 #define _CLASS_FECHA_H
 
-#include <string> //http://stackoverflow.com/questions/4103169/how-do-i-include-the-string-header
-#include <iostream>
-
-using namespace std;
 
 class Fecha {
   private:
-    int dia,mes,anio;
+    int dia, mes, anio;
   public:
-    Fecha();
-    Fecha(int,int,int);
+    Fecha(int = 1, int = 1, int = 1900);
     int getDia();
     int getMes();
     int getAnio();
     void setDia(int);
     void setMes(int);
     void setAnio(int);
-    ~Fecha();
 };
 
 #endif

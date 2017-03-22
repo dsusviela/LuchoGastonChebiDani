@@ -11,13 +11,12 @@ Modulo de defincion de class 'Entrenamiento'
 
 #include "clase.h"
 
-using namespace std;
 
 class Entrenamiento : public Clase{
   private:
     bool enRambla;
   public:
-    Entrenamiento(int, string, Turno, Inscripcion *, bool); //id, nombre, turno, enRambla
+    Entrenamiento(int, int, std::string, Turno, bool); //id, nombre, turno, enRambla
     bool getenRambla();
     void setenRambla(bool);
     ~Entrenamiento();

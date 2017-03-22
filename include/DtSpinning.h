@@ -11,13 +11,12 @@ Modulo de defincion de DtSpinning
 
 #include "DtClase.h"
 
-using namespace std;
 
 class DtSpinning : public DtClase{
   private:
     int cantBicicletas;
   public:
-    DtSpinning(int,string,Turno,Inscripcion*,int); //id, nombre, turno, cantidad
+    DtSpinning(int,std::string,Turno,Inscripcion*,int); //id, nombre, turno, cantidad
     int getcantBicicletas();
     void setcantBicicletas(int);
     ~DtSpinning();

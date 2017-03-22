@@ -8,19 +8,18 @@
 #include <string>
 #include <iostream>
 
-using namespace std;
 
 class DtSocio {
   private:
     int CI;
-    string nombre;
+    std::string nombre;
   public:
     DtSocio(); //no debería declararse esto acá?
-    DtSocio(int, string); //CI, nombre
+    DtSocio(int, std::string); //CI, nombre
     int getCI();
-    string getNombre();
+    std::string getNombre();
     void setCI(int);
-    void setNombre(string);
+    void setNombre(std::string);
 };
 
 

@@ -8,12 +8,6 @@ Modulo de implementacion de DataType 'Fecha'
 #include "../include/fecha.h/"
 
 
-Fecha::Fecha(){
-	this->dia = 1;
-	this->mes = 1;
-	this->anio = 1900;
-}
-
 Fecha::Fecha(int dia,int mes,int anio){
 	this->dia = dia;
 	this->mes = mes;

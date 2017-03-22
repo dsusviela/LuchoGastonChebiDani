@@ -6,13 +6,10 @@ Modulo de implementacion de class 'Inscripcion'
 #include <iostream>
 
 #include "../include/inscripcion.h"
-#include "../include/socio.h"
-#include "../include/DtSocio.h"
-#include "../include/fecha.h"
 
-Inscripcion::Inscripcion(Fecha f, socio *obj_socio){
+Inscripcion::Inscripcion(Fecha f, socio *s){
 	this->fecha = f;
-	this->socio = obj_socio;
+	this->socio = s;
 }
 
 Fecha Inscripcion::getFecha(){

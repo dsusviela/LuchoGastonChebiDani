@@ -9,19 +9,18 @@ Modulo de defincion de class 'Socio'
 #include <string>
 #include <iostream>
 
-using namespace std;
 
 class Socio {
   private:
     int CI;
-    string nombre;
+    std::string nombre;
   public:
     Socio(); //no debería declararse esto acá?
-    Socio(int, string); //CI, nombre
+    Socio(int, std::string); //CI, nombre
     int getCI();
-    string getNombre();
+    std::string getNombre();
     void setCI(int);
-    void setNombre(string);
+    void setNombre(std::string);
 };
 
 #endif

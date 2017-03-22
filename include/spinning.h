@@ -1,5 +1,5 @@
 /*
-Modulo de defincion de class 'Spinning' y su respectivo DataType
+Modulo de defincion de class 'Spinning'
 */
 
 //previene declarar dos veces las cosas por multiples includes de este .h
@@ -11,13 +11,12 @@ Modulo de defincion de class 'Spinning' y su respectivo DataType
 
 #include "clase.h"
 
-using namespace std;
 
 class Spinning : public Clase{
   private:
     int cantBicicletas;
   public:
-    Spinning(int,string,Turno,Inscripcion*,int); //id, nombre, turno, cantidad
+    Spinning(int, int, std::string, Turno, int);
     int getcantBicicletas();
     void setcantBicicletas(int);
     ~Spinning();

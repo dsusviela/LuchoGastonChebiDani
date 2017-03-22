@@ -21,7 +21,7 @@ class Fecha {
     void setDia(int);
     void setMes(int);
     void setAnio(int);
-     ~Fecha();
+    ~Fecha();
 }
 
 #endif

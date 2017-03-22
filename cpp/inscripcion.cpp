@@ -10,7 +10,7 @@ Modulo de implementacion de class 'Inscripcion'
 
 Inscripcion :: Inscripcion(Fecha f, socio *obj_socio){
 	this->fecha = f;
-        this->socio = obj_socio;
+	this->socio = obj_socio;
 }
 
 Fecha Inscripcion :: getFecha(){
@@ -18,7 +18,7 @@ Fecha Inscripcion :: getFecha(){
 }
 
 DtSocio Inscripcion::getSocio(){
-        return DtSocio(this->socio);
+	return DtSocio(this->socio);
 }
 
 void Inscripcion :: setFecha(Fecha f){

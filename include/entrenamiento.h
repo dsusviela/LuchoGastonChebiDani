@@ -15,11 +15,11 @@ class Entrenamiento : public Clase{
   private:
     bool enRambla;
   public:
-   Entrenamiento(int,string,Turno,Inscripcion*,bool); //id, nombre, turno, enRambla
-   bool getenRambla();
-   void setenRambla(bool);
-   ~Entrenamiento();
-   int cupo(); //se pone virtual para que quede claro que es la funcion abstracta
+    Entrenamiento(int,string,Turno,Inscripcion*,bool); //id, nombre, turno, enRambla
+    bool getenRambla();
+    void setenRambla(bool);
+    ~Entrenamiento();
+    int cupo(); //se pone virtual para que quede claro que es la funcion abstracta
                        //de la class Clase, padre de esta
                        //http://stackoverflow.com/questions/4895294/c-virtual-keyword-for-functions-in-derived-classes-is-it-necessary
 
@@ -30,11 +30,11 @@ class DtEntrenamiento : public DtClase{
   private:
     bool enRambla;
   public:
-   DtEntrenamiento(int,string,Turno,Inscripcion*,bool); //id, nombre, turno, enRambla
-   bool getenRambla();
-   void setenRambla(bool);
-   ~DtEntrenamiento();
-   int cupo(); //se pone virtual para que quede claro que es la funcion abstracta
+    DtEntrenamiento(int,string,Turno,Inscripcion*,bool); //id, nombre, turno, enRambla
+    bool getenRambla();
+    void setenRambla(bool);
+    ~DtEntrenamiento();
+    int cupo(); //se pone virtual para que quede claro que es la funcion abstracta
                        //de la class Clase, padre de esta
                        //http://stackoverflow.com/questions/4895294/c-virtual-keyword-for-functions-in-derived-classes-is-it-necessary
 

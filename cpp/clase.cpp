@@ -14,7 +14,7 @@ int Clase::getId(){
 }
 
 int Clase::getAnotados() {
-        return this->anotados;
+  return this->anotados;
 }
 
 string Clase::getNombre(){
@@ -44,7 +44,7 @@ int DtClase::getId(){
 }
 
 int DtClase::getAnotados(){
-        return this->anotados;
+  return this->anotados;
 }
 
 string DtClase::getNombre(){

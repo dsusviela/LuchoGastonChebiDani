@@ -81,11 +81,11 @@ DtClase obtenerClase(int idCLase){                                      //6
 
 //auxiliar para el main
 static void responder_entrada_invalida(int &entrada){
-  cout << "Lo sentimos, lo ingresado no fue una entrada valida, intente de nuevo. \n"
-  cout << "Para registrar una clase de spinning presione 1. \n";
-  cout << "Para registrar una clase de entrenamiento presione 2. \n";
-  cout << "Para salir, presione 0. \n";
-  cin >> entrada;
+  std::cout << "Lo sentimos, lo ingresado no fue una entrada valida, intente de nuevo. \n"
+  std::cout << "Para registrar una clase de spinning presione 1. \n";
+  std::cout << "Para registrar una clase de entrenamiento presione 2. \n";
+  std::cout << "Para salir, presione 0. \n";
+  std::cin >> entrada;
 }
 
 //-----------------------------------------------------------------------
@@ -95,35 +95,35 @@ int main(){
   bool execute = true;
   int entrada;
 
-  cout << "Bienvenido al software del manejo del gimnasio del InCo-FIng.\n";
-  cout << "No hay clases registradas, para continuar debe registrar una clase. \n";
-  cout << "Para registrar una clase de spinning presione 1. \n";
-  cout << "Para registrar una clase de entrenamiento presione 2. \n";
-  cout << "Para salir, presione 0. \n";
+  std::cout << "Bienvenido al software del manejo del gimnasio del InCo-FIng.\n";
+  std::cout << "No hay clases registradas, para continuar debe registrar una clase. \n";
+  std::cout << "Para registrar una clase de spinning presione 1. \n";
+  std::cout << "Para registrar una clase de entrenamiento presione 2. \n";
+  std::cout << "Para salir, presione 0. \n";
 
-  cin >> entrada;
+  std::cin >> entrada;
 
   while (execute){
     switch (entrada) {
       case 1:{
-        cout << "Ingresaremos una clase de spinning. \n";
+        std::cout << "Ingresaremos una clase de spinning. \n";
         try{
-          cout << "Ingrese el Id de la clase"
-          cin >> identificacion_spinning;
+          std::cout << "Ingrese el Id de la clase"
+          std::cin >> identificacion_spinning;
           if (existe_clase(identificacion_spinning)){
-            std::cin.clear(); //resetea las flags de error
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); //ignora toda la entrada invalida
+            std::std::cin.clear(); //resetea las flags de error
+            std::std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); //ignora toda la entrada invalida
             throw std::invalid_argument("La clase que se desea ingresar ya existe en el sistema"); //tira la excepcion
           }
-          cout << "Ingrese el nombre de la clase. \n"
-          cin >> nombre_clase_spinning;
-          cout << "Ingrese el turno en el cual se desarrolla la clase. \n"
-          cin >> turno_clase_spinning;
-          cout << "Ingrese la cantidad de bicicletas con las que cuenta la clase: \n";
-          cin >> cantidad_bicicletas;
+          std::cout << "Ingrese el nombre de la clase. \n"
+          std::cin >> nombre_clase_spinning;
+          std::cout << "Ingrese el turno en el cual se desarrolla la clase. \n"
+          std::cin >> turno_clase_spinning;
+          std::cout << "Ingrese la cantidad de bicicletas con las que cuenta la clase: \n";
+          std::cin >> cantidad_bicicletas;
           if (cantidad_bicicletas > 50){
-            std::cin.clear(); //resetea las flags de error
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); //ignora toda la entrada invalida
+            std::std::cin.clear(); //resetea las flags de error
+            std::std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); //ignora toda la entrada invalida
             throw std::invalid_argument("No se puede ingresar un numero de bicicletas mayor a 50"); //tira la excepcion
           }
 
@@ -135,11 +135,11 @@ int main(){
         break;
       }
       case 2:{
-        cout << "Ingresaremos una clase de entrenamiento. \n";
+        std::cout << "Ingresaremos una clase de entrenamiento. \n";
         break;
       }
       case 0:{
-        cout << "Cerrando aplicacion.\n";
+        std::cout << "Cerrando aplicacion.\n";
         execute = false;
         break;
       }

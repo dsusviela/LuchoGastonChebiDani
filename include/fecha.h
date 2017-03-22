@@ -9,6 +9,8 @@ Modulo de defincion de DataTpe 'Fecha'
 #include <string> //http://stackoverflow.com/questions/4103169/how-do-i-include-the-string-header
 #include <iostream>
 
+using namespace std;
+
 class Fecha {
   private:
     int dia,mes,anio;

@@ -11,6 +11,8 @@ Modulo de defincion de class 'Entrenamiento' y su respectivo DataType
 
 #include "clase.h"
 
+using namespace std;
+
 class Entrenamiento : public Clase{
   private:
     bool enRambla;

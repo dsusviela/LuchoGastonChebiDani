@@ -10,6 +10,8 @@ Se agrega el DataType Fecha al archivo ya que es el unico modulo que lo utilza
 
 #include "socio.h"
 
+using namespace std;
+
 class Inscripcion {
   private:
     Fecha fecha;

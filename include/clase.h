@@ -15,6 +15,8 @@ Se define ademas el enumerado Turno aca ya que es el unico que la utiliza (los h
 
 #include "inscripcion.h"
 
+using namespace std;
+
 /*
 como clase es la unica class que usa turno me parece al re pedo hacerle
 su propio .h

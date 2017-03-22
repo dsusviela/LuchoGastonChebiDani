@@ -11,6 +11,8 @@ Modulo de defincion de class 'Spinning' y su respectivo DataType
 
 #include "clase.h"
 
+using namespace std;
+
 class Spinning : public Clase{
   private:
     int cantBicicletas;

@@ -19,7 +19,7 @@ DtClase::DtClase(int i, int a, std::string n, Turno t){
   this->turno = t;
 
   for(int j = 0; j < 50; j++){
-    this->incripciones[j] = NULL;
+    this->inscripciones[j] = NULL;
   }
 }
 
@@ -30,7 +30,7 @@ DtClase::DtClase(int i, int a, std::string n, Turno t, Inscripcion* inscrip){
   this->turno = t;
 
   for(int j = 0; j < 50; j++) {         //copia el arreglo
-    this->incripciones[j] = inscrip[j];
+    this->inscripciones[j] = inscrip[j];
   }
 }
 
@@ -50,8 +50,12 @@ Turno DtClase::getTurno(){
     return this->turno;
 }
 
-Inscripcion* getInscripciones(){
-  //no se como implementarla
+Inscripcion* DtClase::getInscripciones(){
+  Inscripcion* inscrip[50];
+  for(int j = 0; j < 50; j++) {
+    this->inscripciones[j] = inscrip[j];
+  }
+  return inscrip;
 }
 
 void DtClase::setId(int x){

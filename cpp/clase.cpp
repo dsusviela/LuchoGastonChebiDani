@@ -26,12 +26,16 @@ Turno Clase::getTurno(){
   return this->turno;
 }
 
-Inscripcion* getInscripciones(){
-  //no se como implementarla
+Inscripcion* Clase::getInscripciones(){
+  Inscripcion* inscrip[50];
+  for(int j = 0; j < 50; j++) {
+    this->inscripciones[j] = inscrip[j];
+  }
+  return inscrip;
 }
 
 DtClase Clase::getData(){
-
+  DtClase data = DtClase(id, anotados, nombre, turno, inscripciones);
 }
 
 /* Setters*/

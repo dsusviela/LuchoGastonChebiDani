@@ -21,6 +21,10 @@ Modulo de implementacion de principal.cpp
 #define MAX_SOCIOS 1000
 #define MAX_CLASES 500
 
+
+//el que se quiera animar al Dynamic Cast
+//http://stackoverflow.com/questions/2253168/dynamic-cast-and-static-cast-in-c
+//pero que lo haga en otra branch, yo no entendi nada....
 struct nodo_clases{
   Clase *info_clase;
   bool es_entrenamiento;
@@ -46,15 +50,15 @@ static bool existe_socio(int ci) {
 }
 
 void agregarSocio(int ci, string nombre){                               //1
-  arreglo_socios[tope_socios] = Socio(ci, nombre);
+  arreglo_socios[tope_socios] = Socio(ci, nombre);  // No deberia ser un puntero?   CH
   tope_socios++;
 }
 
-static bool existe_clase(DtClase &clase){
+static bool existe_clase(DtClase clase){
   bool encontre = false;
   int i = 0;
   while(i < tope_clases && encontre = false){
-    if(arreglo_clases[i].info_clase->getId()){
+    if(arreglo_clases[i].info_clase->getId() == clase.getId()){
       encontre = true;
     }
     i++;
@@ -63,7 +67,7 @@ static bool existe_clase(DtClase &clase){
 }
 
 static void agregarSpinning(const DtSpinning &clase_spinning){
-  arreglo_clases[tope_clases].info_clase = *Spinning(clase_spinning.getId(),
+  arreglo_clases[tope_clases].info_clase = *Spinning(clase_spinning.getId(),//no confundir -> con . aca accedo a un struct, va punto. debug *Spinning
                                                     clase_spinning.getAnotados(),
                                                     clase_spinning.getNombre(),
                                                     clase_spinning.getTurno(),
@@ -77,7 +81,7 @@ static void agregarEntrenamiento(const DtSpinning &clase_entrenamiento){
                                                           clase_entrenamiento.getNombre(),
                                                           clase_entrenamiento.getTurno(),
                                                           clase_entrenamiento.getenRambla());
-  arreglo_clases[tope_clases].es_entrenamiento = true;
+  arreglo_clases[tope_clases].es_entrenamiento = true;  //no es un puntero, estoy accediendo al campo del struct
 }
 void agregarClase(const DtClase &clase){                                //2
  tope_clases++;
@@ -126,8 +130,33 @@ void agregarInscripcion(int ciSocio, int idClase, Fecha fecha){         //3
 }
 
 void borrarInscripcion(int ciSocio, int idClase){                       //4
-
+  bool encontre = false;
+  int i = 0;
+  while(i < tope_clases && encontre = false){                  // Busco la clase en arreglo_clases
+    if(arreglo_clases[i].info_clase->getId() == idClase){
+      encontre = true;
+    }
+    i++;
+  };
+  i--;
+  Inscripcion *ins = arreglo_clases[i].info_clase->getInscripciones();     //CHEBI CHUPA PENE DEJAME HACER ESTO POR DIOS
+  int anotados = arreglo_clases[i].info_clase->getAnotados();
+  i = 0; //reutilizar variable
+  encontre = false;
+  while(i < anotados && encontre = false){                                  // Busco el socio entre los inscriptos
+    if(ins[i]->getSocio().getCI() == ciSocio){     //necesito el DataType socio del objeto apuntado por ins[i], una vez que lo tengo le aplico getCI DEBUG
+      encontre = true;
+    }
+    i++;
+  };
+  i--;
+  ins[i] = ins[anotados-1]; //me traigo al ultimo para rellenar el lugar pero tengo inscriptos duplicados
+  ins[anotados-1] = NULL; //NO ESTOY SEGURO QUE SEA ASI ESTO....
+  arreglo_clases[i].info_clase->setAnotados(anotados-1);
 }
+// La funcion anterior la implementé pensando que lo devuelto en getInscripciones es el arreglo de inscripciones original, cuando en realidad no lo hace.
+// No vi otra forma de hacerlo con las operaciones de clase.h . Otra forma que pensé es que la función agregarInscripcion tenga como parámetro agregar Inscripcion(posicion,inscripcion)
+// Y asi yo puedo elegir en que posicion del arreglo poner la inscripcion
 
 DtSocio **obtenerInfoSociosPorClase(int idClase, int &cantSocios){      //5
 
@@ -135,7 +164,40 @@ DtSocio **obtenerInfoSociosPorClase(int idClase, int &cantSocios){      //5
 }
 
 DtClase obtenerClase(int idCLase){                                      //6
+  DtClase res = DtClase();
+  bool encontre = false;
+  int i = 0;
 
+  while(i < tope_clases && encontre = false){
+    if(arreglo_clases[i]->info_clase->getId() == idClase){                 // Busco si está inscripta la clase
+      encontre = true;
+    }
+    i++;
+  };
+  i--;
+
+  if(encontre == true){                                                     // Si está inscripta
+    if(arreglo_clases[i].es_entrenamiento == true){                        // Si es entrenamiento
+      int idres = arreglo_clases[i].info_clase->getId();
+      int anotadosres = arreglo_clases[i].info_clase->getAnotados();
+      std::string nombreres = arreglo_clases[i].info_clase->getNombre();
+      Turno turnores = arreglo_clases[i].info_clase->getTurno();
+      Inscripcion *inscripcionres = arreglo_clases[i].info_clase->getInscripciones();
+      bool enRamblares = arreglo_clases[i].info_clase->getenRambla();
+      res = DtEntrenamiento(idres, anotadosres, nombreres, turnores, enRamblares);            // No tiene parametro inscripcion el constructor???
+
+    } else {
+                                                                                      // Si es spinning
+      int idres = arreglo_clases[i]->info_clase->getId();
+      int anotadosres = arreglo_clases[i]->info_clase->getAnotados();
+      std::string nombreres = arreglo_clases[i]->info_clase->getNombre();
+      Turno turnores = arreglo_clases[i]->info_clase->getTurno();
+      Inscripcion *inscripcionres = arreglo_clases[i]->info_clase->getInscripciones();
+      int cantbicicletasres = arreglo_clases[i]->info_clase->getcantBicicletas();
+      res = DtSpinning(idres, anotadosres, nombreres, turnores, cantbicicletasres);
+    }
+  };
+  return res;
 }
 
 

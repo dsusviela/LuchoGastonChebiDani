@@ -28,7 +28,7 @@ Modulo de implementacion de principal.cpp
 struct nodo_clases{
   Clase *info_clase;
   bool es_entrenamiento;
-};
+}
 
 Socio *arreglo_socios[MAX_SOCIOS];
 int tope_socios = 0;
@@ -40,7 +40,7 @@ int tope_clases = 0;
 static bool existe_socio(int ci) {
   bool encontre = false;
   int i = 0;
-  while(i < tope_socios && encontre == false) {
+  while(i < tope_socios && encontre = false) {
     if(arreglo_socios[i]->getCI() == ci){
       encontre = true;
     }
@@ -49,26 +49,16 @@ static bool existe_socio(int ci) {
   return encontre;
 }
 
-<<<<<<< HEAD
 void agregarSocio(int ci, string nombre){                               //1
   arreglo_socios[tope_socios] = Socio(ci, nombre);  // No deberia ser un puntero?   CH
-=======
-void agregarSocio(int ci, std::string nombre){                               //1
-  arreglo_socios[tope_socios] = Socio(ci, nombre);
->>>>>>> ca11994f737d4e29a661a039371397f28a61601a
   tope_socios++;
 }
 
 static bool existe_clase(DtClase clase){
   bool encontre = false;
   int i = 0;
-<<<<<<< HEAD
   while(i < tope_clases && encontre = false){
     if(arreglo_clases[i].info_clase->getId() == clase.getId()){
-=======
-  while(i < tope_clases && encontre == false){
-    if(arreglo_clases[i]->info_clase->getId()){
->>>>>>> ca11994f737d4e29a661a039371397f28a61601a
       encontre = true;
     }
     i++;
@@ -77,11 +67,7 @@ static bool existe_clase(DtClase clase){
 }
 
 static void agregarSpinning(const DtSpinning &clase_spinning){
-<<<<<<< HEAD
   arreglo_clases[tope_clases].info_clase = *Spinning(clase_spinning.getId(),//no confundir -> con . aca accedo a un struct, va punto. debug *Spinning
-=======
-  arreglo_clases[tope_clases]->info_clase = *Spinning(clase_spinning.getId(),
->>>>>>> ca11994f737d4e29a661a039371397f28a61601a
                                                     clase_spinning.getAnotados(),
                                                     clase_spinning.getNombre(),
                                                     clase_spinning.getTurno(),
@@ -217,14 +203,14 @@ DtClase obtenerClase(int idCLase){                                      //6
 
 //auxiliar para el main
 static void responder_entrada_invalida(int &entrada){
-  std::cout << "Lo sentimos, lo ingresado no fue una entrada valida, intente de nuevo. \n";
+  std::cout << "Lo sentimos, lo ingresado no fue una entrada valida, intente de nuevo. \n"
   std::cout << "Para registrar una clase de spinning presione 1. \n";
   std::cout << "Para registrar una clase de entrenamiento presione 2. \n";
   std::cout << "Para registrar una nueva clase de entrenamiento presione 2. \n";
-  std::cout << "Para registrar un nuevo socio presione 3. \n";
-  std::cout << "Para inscribir un socio existente a una clase existente presione 4. \n";
-  std::cout << "Para borrar una inscripcion de un socio de una clase presione 5. \n";
-  std::cout << "Para desplegar informacion sobre las clases ingresadas presione 6. \n";
+  std::cout << "Para registrar un nuevo socio presione 3. \n"
+  std::cout << "Para inscribir un socio existente a una clase existente presione 4. \n"
+  std::cout << "Para borrar una inscripcion de un socio de una clase presione 5. \n"
+  std::cout << "Para desplegar informacion sobre las clases ingresadas presione 6. \n"
   std::cout << "Para salir, presione 0. \n";
   std::cin >> entrada;
 }
@@ -241,10 +227,10 @@ int main(){
   while (execute){
     std::cout << "Para registrar una nueva clase de spinning presione 1. \n";
     std::cout << "Para registrar una nueva clase de entrenamiento presione 2. \n";
-    std::cout << "Para registrar un nuevo socio presione 3. \n";
-    std::cout << "Para inscribir un socio existente a una clase existente presione 4. \n";
-    std::cout << "Para borrar una inscripcion de un socio de una clase presione 5. \n";
-    std::cout << "Para desplegar informacion sobre las clases ingresadas presione 6. \n";
+    std::cout << "Para registrar un nuevo socio presione 3. \n"
+    std::cout << "Para inscribir un socio existente a una clase existente presione 4. \n"
+    std::cout << "Para borrar una inscripcion de un socio de una clase presione 5. \n"
+    std::cout << "Para desplegar informacion sobre las clases ingresadas presione 6. \n"
     std::cout << "Para salir, presione 0. \n";
 
     std::cin >> entrada;
@@ -253,16 +239,16 @@ int main(){
       case 1:{
         std::cout << "Ingresaremos una clase de spinning. \n";
         try{
-          std::cout << "Ingrese el Id de la clase";
+          std::cout << "Ingrese el Id de la clase"
           std::cin >> identificacion_spinning;
           if (existe_clase(identificacion_spinning)){
             std::std::cin.clear(); //resetea las flags de error
             std::std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); //ignora toda la entrada invalida
             throw std::invalid_argument("La clase que se desea ingresar ya existe en el sistema"); //tira la excepcion
           }
-          std::cout << "Ingrese el nombre de la clase. \n";
+          std::cout << "Ingrese el nombre de la clase. \n"
           std::cin >> nombre_clase_spinning;
-          std::cout << "Ingrese el turno en el cual se desarrolla la clase. \n";
+          std::cout << "Ingrese el turno en el cual se desarrolla la clase. \n"
           std::cin >> turno_clase_spinning;
           std::cout << "Ingrese la cantidad de bicicletas con las que cuenta la clase: \n";
           std::cin >> cantidad_bicicletas;
@@ -277,7 +263,7 @@ int main(){
           agregarClase(clase_spinning_ains);
           std::cout << "Clase ingresada exitosamente. \n";
 
-        } catch(const std::invalid_argument &ia) {responder_entrada_invalida(entrada);};
+        } catch(const std::invalid_argument &ia) {responder_entrada_invalida(entrada)};
         break;
       }
       //nuevo entrenamiento
@@ -304,7 +290,7 @@ int main(){
           agregarClase(clase_entrenamiento_ains);
           std::cout << "Clase ingresada exitosamente." << std::endl;
 
-        } catch(const std::invalid_argument &ia) {responder_entrada_invalida(entrada);}
+        } catch(const std::invalid_argument &ia) {responder_entrada_invalida(entrada)};
         break;
       }
       //nuevo socio
@@ -318,11 +304,11 @@ int main(){
             std::std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); //ignora toda la entrada invalida hasta el fin de linea
             throw(std::invalid_argument("El socio ya se encuentra registrado")); //tira la excepcion
           }
-          std::cout << "Ingrese el nombre del socio. \n";
+          std::cout << "Ingrese el nombre del socio. \n"
           std::cin >> nombre_socio;
           agregarSocio(cedula_socio, nombre_socio);
           std::cout << "Socio registrado exitosamente" << std::endl;
-        }catch(const std::invalid_argument &ia) {responder_entrada_invalida(entrada);}
+        }catch(const std::invalid_argument &ia) {responder_entrada_invalida(entrada)}
         break;
       }
       //inscribir socio a una clase
@@ -346,7 +332,7 @@ int main(){
           }
           agregarInscripcion(cedula_socio_ainscribir, id_clase_ainscribir, fecha_inscripcion);
           std::cout << "Socio inscripto exitosamente";
-        }catch(const std::invalid_argument &ia) {responder_entrada_invalida(entrada);}
+        }catch(const std::invalid_argument &ia) {responder_entrada_invalida(entrada)}
         break;
       }
       //desinscribir socio de clase
@@ -367,7 +353,7 @@ int main(){
           }
           borrarInscripcion(cedula_socio_adesinscribir, id_clase_adesinscribir);
           std::cout << "Socio inscripto exitosamente";
-        }catch(const std::invalid_argument &ia) {responder_entrada_invalida(entrada);}
+        }catch(const std::invalid_argument &ia) {responder_entrada_invalida(entrada)}
         break;
       }
       //desplegar informacion, no se hasta que punto podemos sobrecargar el operador
@@ -391,7 +377,7 @@ int main(){
           }
 
           std::cout << "Informacion desplegada exitosamente. \n";
-        }catch(const std::invalid_argument &ia) {responder_entrada_invalida(entrada);}
+        }catch(const std::invalid_argument &ia) {responder_entrada_invalida(entrada)}
         break;
       }
       //cerrar programa

@@ -1,4 +1,4 @@
-*
+/*
 Modulo de implementacion de principal.cpp
 */
 
@@ -60,7 +60,7 @@ static bool existe_clase(int id_clase){
     }
     i++;
   }
-  return encontre; 
+  return encontre;
 }
 
 static void agregarSpinning(DtSpinning *clase_spinning){
@@ -153,18 +153,15 @@ void borrarInscripcion(int ciSocio, int idClase){                       //4
   j--;
   arreglo_clases[i]->borrarInscripcion(j);
 }
-// La funcion anterior la implementé pensando que lo devuelto en getInscripciones es el arreglo de inscripciones original, cuando en realidad no lo hace.
-// No vi otra forma de hacerlo con las operaciones de clase.h . Otra forma que pensé es que la función agregarInscripcion tenga como parámetro agregar Inscripcion(posicion,inscripcion)
-// Y asi yo puedo elegir en que posicion del arreglo poner la inscripcion
 
 DtSocio **obtenerInfoSociosPorClase(int idClase, int &cantSocios){ //5
-    int i = 0;
-    bool encontre = false;
-    while(i < tope_clases && encontre = false){
-    if(arreglo_clases[i]->getId() == idClase){                
+  int i = 0;
+  bool encontre = false;
+  while(i < tope_clases && encontre = false){
+    if(arreglo_clases[i]->getId() == idClase){
       encontre = true;
     }
-    i++;
+  i++;
   };
   i--;
   Inscripcion** arreglo_ins = arreglo_clases[i]->getInscripciones();
@@ -208,6 +205,10 @@ DtClase obtenerClase(int idCLase){                                      //6
   return res;
 }
 
+//IMPORTANTE PARA CIN, SE USA SOLO PARA INTEGERS
+//PARA STRINGS USAMOS GETLINE
+//esto es porque cin lee solo hasta el primer espacio, entonces si yo quiero ingresar
+//un nombre de un socio "nombre apellido", cin registra solo el nombre.
 
 //auxiliar para el main
 static void responder_entrada_invalida(int &entrada){
@@ -268,7 +269,7 @@ int main(){
             throw std::invalid_argument("La clase que se desea ingresar ya existe en el sistema"); //tira la excepcion
           }
           std::cout << "Ingrese el nombre de la clase. \n";
-          std::cin >> nombre_clase_spinning;
+          std::getline(cin, nombre_clase_spinning);
           std::cout << "Ingrese el turno en el cual se desarrolla la clase. \n";
           std::cin >> turno_clase_spinning;
           std::cout << "Ingrese la cantidad de bicicletas con las que cuenta la clase: \n";
@@ -298,7 +299,7 @@ int main(){
             throw(std::invalid_argument("La clase que se desea ingresar ya existe en el sistema")); //tira la excepcion
           }
           std::cout << "Ingrese el nombre de la clase. \n";
-          std::cin >> nombre_clase_entrenamiento;
+          std::getline(cin, nombre_clase_entrenamiento);
           std::cout << "Ingrese el turno en el cual se desarrolla la clase. \n";
           std::cin >> turno_clase_entrenamiento;
           std::cout << "Ingrese si la clase se desarrolla en la rambla. \n";
@@ -325,7 +326,7 @@ int main(){
             throw(std::invalid_argument("El socio ya se encuentra registrado")); //tira la excepcion
           }
           std::cout << "Ingrese el nombre del socio. \n";
-          std::cin >> nombre_socio;
+          std::getline(cin, nombre_socio);
           agregarSocio(cedula_socio, nombre_socio);
           std::cout << "Socio registrado exitosamente" << std::endl;
         }catch(const std::invalid_argument &ia) {responder_entrada_invalida(entrada)}
@@ -345,13 +346,16 @@ int main(){
           if (!existe_clase(id_clase_ainscribir)){
             throw(std::invalid_argument("La clase no esta registrada"));
           }
-          std::cout << "Ingrese la fecha de inscripcion. \n";
-          std::cin >> fecha_inscripcion;
+          std::cout << "Ingrese la fecha de inscripcion. Dia Mes Year. \n";
+          std::cin >> dia >> mes >> year;
+          fecha fecha_inscripcion = Fecha(dia, mes, year);
           if(es_valida_fecha(fecha_inscripcion)){
+            std::cin.clear(); //resetea las flags de error
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); //ignora toda la entrada invalida hasta el fin de linea
             throw(std::invalid_argument("La fecha no es valida"));
           }
           agregarInscripcion(cedula_socio_ainscribir, id_clase_ainscribir, fecha_inscripcion);
-          std::cout << "Socio inscripto exitosamente";
+          std::cout << "Socio inscripto exitosamente. \n";
         }catch(const std::invalid_argument &ia) {responder_entrada_invalida(entrada)}
         break;
       }
@@ -364,11 +368,15 @@ int main(){
           std::cout << "Ingrese la cedula del socio a desinscribir. \n";
           std::cin >> cedula_socio_adesinscribir;
           if (!existe_socio(cedula_socio_adesinscribir)){
+            std::cin.clear(); //resetea las flags de error
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); //ignora toda la entrada invalida hasta el fin de linea
             throw(std::invalid_argument("El socio no esta registrado"));
           }
           std::cout << "Ingrese el identificador de la clase a la que se desea desinscribir. \n";
-          std::cin >> id_clase_adesinscribir;
+          std::getline(cin, id_clase_adesinscribir);
           if (!existe_clase(id_clase_adesinscribir)){
+            std::cin.clear(); //resetea las flags de error
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); //ignora toda la entrada invalida hasta el fin de linea
             throw(std::invalid_argument("La clase no esta registrada"));
           }
           borrarInscripcion(cedula_socio_adesinscribir, id_clase_adesinscribir);
@@ -383,38 +391,43 @@ int main(){
           std::cout << "Ingrese el identificador de la clase que se desea desplegar. \n";
           std::cin >> id_clase_adesplegar;
           if (!existe_clase(id_clase_adesplegar)){
+            std::cin.clear(); //resetea las flags de error
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); //ignora toda la entrada invalida hasta el fin de linea
             throw(std::invalid_argument("La clase no esta registrada"));
           }
-          std::cout << obtenerClase(id_clase_adesplegar) << std::endl; //cuidado como se sobrecarga para hacer esto valido
-
+          std::cout << obtenerClase(id_clase_adesplegar);
+          std::cout << std::endl; //por las dudas del sobrecargado
           std::cout << "Informacion desplegada exitosamente. \n";
         }catch(const std::invalid_argument &ia) {responder_entrada_invalida(entrada)}
         break;
       }
+      //desplegar todos los socios de una clase
       case 7:{
         std::cout << "Desplegaremos los socios de la clase deseada. \n";
         try{
           std::cout << "Ingrese el identificador de la clase que desee. \n";
           std::cin >> id_clase_adesplegar;
           if (!existe_clase(id_clase_adesplegar)){
+            std::cin.clear(); //resetea las flags de error
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); //ignora toda la entrada invalida hasta el fin de linea
             throw(std::invalid_argument("La clase no esta registrada"));
           }
-            bool encontrado = false;
-            int k = 0;
-            while(i < tope_clases && encontrado = false){
-                if(arreglo_clases[k]->getId() == idClase){                 // Busco si está inscripta la clase
-                encontrado = true;
-                }
-                k++;
-            };
-            k--;
+          bool encontrado = false;
+          int k = 0;
+          while(i < tope_clases && encontrado = false){
+            if(arreglo_clases[k]->getId() == idClase){
+              encontrado = true;
+            }
+            k++;
+          };
+          k--;
           int cSocios = arreglo_clases[k]->getAnotados();
-          if(cSocios = 0)
-              std::cout << "La clase no tiene ningun socio inscripto. \n";
-          else {
-          DtSocio** socios_aimprimir = obtenerInfoSociosPorClase(id_clase_adesplegar,cSocios);
-          std::cout << "Los socios de la clase " << arreglo_clases[k]->getNombre() << " son: \n"; 
-          imprimir_socios(socios_aimprimir, cSocios);
+          if(cSocios = 0){
+            std::cout << "La clase no tiene ningun socio inscripto. \n";
+          } else {
+            DtSocio **socios_aimprimir = obtenerInfoSociosPorClase(id_clase_adesplegar,cSocios);
+            std::cout << "Los socios de la clase " << arreglo_clases[k]->getNombre() << " son: \n";
+            imprimir_socios(socios_aimprimir, cSocios);
           }
           std::cout << "Informacion desplegada exitosamente. \n";
         }catch(const std::invalid_argument &ia) {responder_entrada_invalida(entrada)}

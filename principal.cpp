@@ -347,12 +347,14 @@ int main() {
       try {
         std::cout << "Ingrese la cedula del socio a inscribir. \n";
         std::cin >> cedula_socio_ainscribir;
+        std::cin.clear();
         if (!existe_socio(cedula_socio_ainscribir)) {
           throw(std::invalid_argument("El socio no esta registrado"));
         }
         std::cout
             << "Ingrese el identificador de la clase a la que se desea inscribir. \n";
         std::cin >> id_clase_ainscribir;
+        std::cin.clear();
         if (!existe_clase(id_clase_ainscribir)) {
           throw(std::invalid_argument("La clase no esta registrada"));
         }

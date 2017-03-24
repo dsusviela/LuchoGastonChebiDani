@@ -10,15 +10,15 @@
 #include "../include/inscripcion.h"
 
 /* Constructores */
-DtClase::DtClase(int i, std::string n, Turno t){
+DtClase::DtClase(int i, std::string n, Turno t) {
   this->id = i;
   this->anotados = 0;
   this->nombre = n;
   this->turno = t;
-  this->inscripciones = new *Inscripcion[50];
+  this->inscripciones = new InscripcionPtr[50];
 }
 
-DtClase::DtClase(int i, int a, std::string n, Turno t, Inscripcion **inscrip){
+DtClase::DtClase(int i, int a, std::string n, Turno t, Inscripcion **inscrip) {
   this->id = i;
   this->anotados = a;
   this->nombre = n;
@@ -27,38 +27,40 @@ DtClase::DtClase(int i, int a, std::string n, Turno t, Inscripcion **inscrip){
 }
 
 /* Getters */
-int DtClase::getId(){
+int DtClase::getId() {
   return this->id;
 }
 
-int DtClase::getAnotados(){
+int DtClase::getAnotados() {
   return this->anotados;
 }
 
-std::string DtClase::getNombre(){
+std::string DtClase::getNombre() {
   return this->nombre;
 }
 
-Turno DtClase::getTurno(){
+Turno DtClase::getTurno() {
   return this->turno;
 }
 
-Inscripcion ** DtClase::getInscripciones(){
+Inscripcion ** DtClase::getInscripciones() {
   return this->inscripciones;
 }
 
 /* Setters */
-void DtClase::setId(int x){
+void DtClase::setId(int x) {
   this->id = x;
 }
 
-void DtClase::setNombre(std::string s){
+void DtClase::setNombre(std::string s) {
   this->nombre = s;
 }
 
-void DtClase::setTurno(Turno t){
+void DtClase::setTurno(Turno t) {
   this->turno = t;
 }
 
 /* Destructor */
-DtClase::~DtClase(){};
+DtClase::~DtClase() {
+}
+;

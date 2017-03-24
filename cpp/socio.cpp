@@ -1,6 +1,6 @@
 /*
-Modulo de implementacion de class 'Socio'
-*/
+ Modulo de implementacion de class 'Socio'
+ */
 
 #include <iostream>
 #include <string>
@@ -8,32 +8,31 @@ Modulo de implementacion de class 'Socio'
 #include "../include/socio.h"
 
 /*Constructor por defecto*/
-Socio::Socio(){
+Socio::Socio() {
   this->CI = 0;
   this->nombre = "nombre";
 }
 
 /*Constructor por parametro*/
-Socio::Socio(int cedula, std::string name){
+Socio::Socio(int cedula, std::string name) {
   this->CI = cedula;
   this->nombre = name;
 }
 
-
- /*Getters*/
-int Socio::getCI(){
+/*Getters*/
+int Socio::getCI() {
   return this->CI;
 }
 
-std::string Socio::getNombre(){
+std::string Socio::getNombre() {
   return this->nombre;
 }
 
 /*Setters*/
-void Socio::setCI(int cedula){
+void Socio::setCI(int cedula) {
   this->CI = cedula;
 }
 
-void Socio::setNombre(std::string name){
+void Socio::setNombre(std::string name) {
   this->nombre = name;
 }

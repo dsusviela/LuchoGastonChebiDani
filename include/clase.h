@@ -1,8 +1,8 @@
 /*
-Modulo de defincion de class 'Clase' y su respectivo DataType
+ Modulo de defincion de class 'Clase' y su respectivo DataType
 
-Se define ademas el enumerado Turno aca ya que es el unico que la utiliza (los hijos de la class 'Clase'
-                                                                            hacen include de este archivo)
+ Se define ademas el enumerado Turno aca ya que es el unico que la utiliza (los hijos de la class 'Clase'
+ hacen include de este archivo)
 
  */
 
@@ -17,8 +17,7 @@ Se define ademas el enumerado Turno aca ya que es el unico que la utiliza (los h
 #include "turno.h"
 #include "DtClase.h"
 
-
-class Clase{
+class Clase {
 private:
   int id;
   int anotados;
@@ -34,7 +33,6 @@ public:
   std::string getNombre();
   Turno getTurno();
   Inscripcion **getInscripciones();
-  virtual DtClase getData() = 0;
   void setId(int);
   void setNombre(std::string);
   void setTurno(Turno);
@@ -42,6 +40,5 @@ public:
   void borrarInscripcion(int pos);
   virtual ~Clase();
 };
-
 
 #endif

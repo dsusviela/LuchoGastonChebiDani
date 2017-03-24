@@ -134,7 +134,7 @@ void agregarInscripcion(int ciSocio, int idClase, Fecha fecha){         //3
 void borrarInscripcion(int ciSocio, int idClase){                       //4
   bool encontre = false;
   int i = 0;
-  while(i < tope_clases && encontre = false){                  // Busco la clase en arreglo_clases
+  while(i < tope_clases && encontre == false){                  // Busco la clase en arreglo_clases
     if(arreglo_clases[i]->getId() == idClase){
       encontre = true;
     }
@@ -144,7 +144,7 @@ void borrarInscripcion(int ciSocio, int idClase){                       //4
   Inscripcion **ins = arreglo_clases[i]->getInscripciones();     //CHEBI CHUPA PENE DEJAME HACER ESTO POR DIOS
   int j = 0; //reutilizar variable REUTILIZAME ESTA PUTO
   encontre = false;
-  while(j < anotados && encontre = false){                                  // Busco el socio entre los inscriptos
+  while(j < anotados && encontre == false){                                  // Busco el socio entre los inscriptos
     if(ins[j]->getSocio().getCI() == ciSocio){     //necesito el DataType socio del objeto apuntado por ins[i], una vez que lo tengo le aplico getCI DEBUG
       encontre = true;
     }
@@ -166,9 +166,9 @@ DtSocio **obtenerInfoSociosPorClase(int idClase, int &cantSocios){ //5
   i--;
   Inscripcion** arreglo_ins = arreglo_clases[i]->getInscripciones();
   int tope = arreglo_clases[i]->getAnotados();
-  DtSocio **res = new *DtSocio[cantSocios];
+  DtSocio **res = new DtSocioPtr[cantSocios];
   for(int j = 0; j < tope; j ++){
-    res[j] = new DtSocio(ins[j]->getSocio());
+    res[j] = new DtSocio(arreglo_ins[j]->getSocio());
   }
   return res;
 }
@@ -176,7 +176,7 @@ DtSocio **obtenerInfoSociosPorClase(int idClase, int &cantSocios){ //5
 DtClase obtenerClase(int idCLase){                                      //6
   bool encontre = false;
   int i = 0;
-  while(i < tope_clases && encontre = false){
+  while(i < tope_clases && encontre == false){
     if(arreglo_clases[i]->getId() == idClase){                 // Busco si está inscripta la clase
       encontre = true;
     }

@@ -11,23 +11,24 @@
 #include "../include/DtSpinning.h"
 
 /* Constructores */
-DtSpinning::DtSpinning(int x,int a,std::string s,Turno t,Inscripcion **i,int c) : Clase(x,a,s,t,i){
+DtSpinning::DtSpinning(int x, int a, std::string s, Turno t, Inscripcion **i,
+    int c) :
+    Clase(x, a, s, t, i) {
   this->cantBicicletas = c;
 }
 
-DtSpinning::DtSpinning(int x,std::string s,Turno t,int c) : DtClase(x,s,t){
+DtSpinning::DtSpinning(int x, std::string s, Turno t, int c) :
+    DtClase(x, s, t) {
   this->cantBicicletas = c;
 }
 
 /* Getters */
-int DtSpinning::getcantBicicletas(){
+int DtSpinning::getcantBicicletas() {
   return this->cantBicicletas;
 }
 
-
-
 /* Setters */
-void DtSpinning::setcantBicicletas(int cant){
+void DtSpinning::setcantBicicletas(int cant) {
   this->cantBicicletas = cant;
 }
 

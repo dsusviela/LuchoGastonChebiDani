@@ -1,5 +1,5 @@
 /*
-Modulo de defincion de DtSpinning
+ Modulo de defincion de DtSpinning
  */
 
 //previene declarar dos veces las cosas por multiples includes de este .h
@@ -11,8 +11,7 @@ Modulo de defincion de DtSpinning
 
 #include "DtClase.h"
 
-
-class DtSpinning : public DtClase{
+class DtSpinning: public DtClase {
 private:
   int cantBicicletas;
 public:

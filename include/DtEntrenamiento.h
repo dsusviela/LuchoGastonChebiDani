@@ -10,7 +10,7 @@
 
 #include "DtClase.h"
 
-class DtEntrenamiento : public DtClase{
+class DtEntrenamiento: public DtClase {
 private:
   bool enRambla;
 public:
@@ -22,7 +22,5 @@ public:
   virtual int cupo();
   virtual std::ostream& operator<<(std::ostream&, const DtEntrenamiento&);
 };
-
-
 
 #endif /* INCLUDE_DTENTRENAMIENTO_H_ */

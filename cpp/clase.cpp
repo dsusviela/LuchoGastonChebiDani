@@ -1,7 +1,6 @@
 /*
-Modulo de implementacion de class 'Clase'
-*/
-
+ Modulo de implementacion de class 'Clase'
+ */
 
 #include <string> //http://stackoverflow.com/questions/4103169/how-do-i-include-the-string-header
 #include <iostream>
@@ -11,57 +10,54 @@ Modulo de implementacion de class 'Clase'
 
 /*Constructor*/
 
-Clase::Clase(int ident, int ano, std::string nome, Turno turn, Inscripcion **i){
-    this->id = ident;
-    this->anotados = ano;
-    this->nombre = nome;
-    this->turno = turn;
-    this->inscripciones = i;
+Clase::Clase(int ident, int ano, std::string nome, Turno turn,
+    Inscripcion **i) {
+  this->id = ident;
+  this->anotados = ano;
+  this->nombre = nome;
+  this->turno = turn;
+  this->inscripciones = i;
 }
 
-Clase::Clase(int ident, std::string nome, Turno turn){
-    this->id = ident;
-    this->anotados = 0;
-    this->nombre = nome;
-    this->turno = turn;
-    this->inscripciones = new *Inscripcion[50];
+Clase::Clase(int ident, std::string nome, Turno turn) {
+  this->id = ident;
+  this->anotados = 0;
+  this->nombre = nome;
+  this->turno = turn;
+  this->inscripciones = new InscripcionPtr[50];
 }
 
 /* Getters */
-int Clase::getId(){
+int Clase::getId() {
   return this->id;
 }
 
-int Clase::getAnotados(){
+int Clase::getAnotados() {
   return this->anotados;
 }
 
-std::string Clase::getNombre(){
+std::string Clase::getNombre() {
   return this->nombre;
 }
 
-Turno Clase::getTurno(){
+Turno Clase::getTurno() {
   return this->turno;
 }
 
-Inscripcion ** Clase::getInscripciones(){
+Inscripcion ** Clase::getInscripciones() {
   return this->inscripciones;
 }
 
-DtClase Clase::getData(){
-  DtClase data = DtClase(id, anotados, nombre, turno, inscripciones);
-}
-
 /* Setters*/
-void Clase::setId(int x){
+void Clase::setId(int x) {
   this->id = x;
 }
 
-void Clase::setNombre(std::string s){
+void Clase::setNombre(std::string s) {
   this->nombre = s;
 }
 
-void Clase::setTurno(Turno t){
+void Clase::setTurno(Turno t) {
   this->turno = t;
 }
 
@@ -71,10 +67,14 @@ void Clase::agregarInscripcion(Inscripcion *inscrip) {
   this->anotados++;
 }
 
-void Clase::borrarInscripcion(int pos){
-    delete this->inscripciones[pos];
-    this->inscripciones[pos] = this->inscripciones[this->anotados];
-    this->anotados--;
+void Clase::borrarInscripcion(int pos) {
+  delete this->inscripciones[pos];
+  this->inscripciones[pos] = this->inscripciones[this->anotados];
+  this->anotados--;
+}
 
 /* Destructor */
-Clase::~Clase(){};
+Clase::~Clase() {
+  delete[] this->inscripciones;
+}
+;

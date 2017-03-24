@@ -14,9 +14,7 @@ class DtSocio {
     int CI;
     std::string nombre;
   public:
-    DtSocio(); //no debería declararse esto acá?
-    DtSocio(int, std::string); //CI, nombre
-    int getCI();
+    DtSocio(int = 1, std::string = "No se ingreso nombre");
     std::string getNombre();
     void setCI(int);
     void setNombre(std::string);

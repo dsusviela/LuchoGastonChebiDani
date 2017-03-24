@@ -14,7 +14,7 @@ Socio::Socio(){
 }
 
 /*Constructor por parametro*/
-Socio::Socio(int cedula, string name){
+Socio::Socio(int cedula, std::string name){
   this->CI = cedula;
   this->nombre = name;
 }
@@ -25,7 +25,7 @@ int Socio::getCI(){
   return this->CI;
 }
 
-string Socio::getNombre(){
+std::string Socio::getNombre(){
   return this->nombre;
 }
 
@@ -34,6 +34,6 @@ void Socio::setCI(int cedula){
   this->CI = cedula;
 }
 
-void Socio::setNombre(string name){
+void Socio::setNombre(std::string name){
   this->nombre = name;
 }

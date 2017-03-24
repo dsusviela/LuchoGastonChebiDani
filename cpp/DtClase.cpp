@@ -1,8 +1,5 @@
 /*
- * DtClase.cpp
- *
- *  Created on: Mar 22, 2017
- *      Author: Chebi
+ * Modulio de implementacion de datatype 'DtClase'
  */
 
 #include <string> //http://stackoverflow.com/questions/4103169/how-do-i-include-the-string-header
@@ -29,35 +26,35 @@ DtClase::DtClase(int i, int a, std::string n, Turno t, Inscripcion **inscrip){
 }
 
 int DtClase::getId(){
-    return this->id;
+  return this->id;
 }
 
 int DtClase::getAnotados(){
-    return this->anotados;
+  return this->anotados;
 }
 
 std::string DtClase::getNombre(){
-    return this->nombre;
+  return this->nombre;
 }
 
 Turno DtClase::getTurno(){
-    return this->turno;
+  return this->turno;
 }
 
 Inscripcion ** DtClase::getInscripciones(){
-    return this->inscripciones;
+  return this->inscripciones;
 }
 
 void DtClase::setId(int x){
-    this->id = x;
+  this->id = x;
 }
 
 void DtClase::setNombre(std::string s){
-    this->nombre = s;
+  this->nombre = s;
 }
 
 void DtClase::setTurno(Turno t){
-    this->turno = t;
+  this->turno = t;
 }
 
 DtClase::~DtClase(){};

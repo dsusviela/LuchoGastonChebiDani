@@ -11,22 +11,22 @@ Modulo de implementacion de class 'Spinning'
 
 
 Spinning::Spinning(int x,int a,std::string s,Turno t,Inscripcion **i,int c) : Clase(x,a,s,t,i){
-	this->cantBicicletas = c;
+  this->cantBicicletas = c;
 }
 
 Spinning::Spinning(int x,std::string s,Turno t,int c) : Clase(x,s,t){
-	this->cantBicicletas = c;
+  this->cantBicicletas = c;
 }
 
 int Spinning::getcantBicicletas(){
-	return this->cantBicicletas;
+  return this->cantBicicletas;
 }
 
 void Spinning::setcantBicicletas(int cant){
-	this->cantBicicletas = cant;
+  this->cantBicicletas = cant;
 }
 
-int Spinning :: cupo(){
+int Spinning::cupo(){
   return cantBicicletas-anotados;
 }
 
@@ -40,6 +40,6 @@ int Spinning :: cupo(){
  * estoy 93% seguro que esto anda
  */
 
-DtSpining Spinning::getData(){
+DtSpinning Spinning::getData(){
   return DtSpining(getID(), getAnotados(), getNombre(), getTurno(), getInscripcion(), getcantBicicletas());  
 }

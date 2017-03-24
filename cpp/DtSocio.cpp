@@ -7,25 +7,21 @@
 
 #include "../include/DtSocio.h"
 
-/*Constructor por defecto*/
-DtSocio::DtSocio(){
-  this->CI = 0;
-  this->nombre = "nombre";
-}
 
-/*Constructor por parametro*/
-DtSocio::DtSocio(int cedula, string name){
+
+/*Constructor*/
+DtSocio::DtSocio(int cedula, std::string name){
   this->CI = cedula;
   this->nombre = name;
 }
 
 
- /*Getters*/
+/*Getters*/
 int DtSocio::getCI(){
   return this->CI;
 }
 
-string DtSocio::getNombre(){
+std::string DtSocio::getNombre(){
   return this->nombre;
 }
 
@@ -34,7 +30,7 @@ void DtSocio::setCI(int cedula){
   this->CI = cedula;
 }
 
-void DtSocio::setNombre(string name){
+void DtSocio::setNombre(std::string name){
   this->nombre = name;
 }
 

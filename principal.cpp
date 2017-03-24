@@ -1,4 +1,4 @@
-*
+/*
 Modulo de implementacion de principal.cpp
 */
 

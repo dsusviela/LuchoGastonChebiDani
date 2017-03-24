@@ -11,15 +11,16 @@
 #include "DtClase.h"
 
 class DtEntrenamiento : public DtClase{
-  private:
-    bool enRambla;
-  public:
-    DtEntrenamiento(int, int, std::string, Turno, Inscripcion**, bool); //id, nombre, turno, enRambla
-    DtEntrenamiento(int, std::string, Turno, bool);
-    bool getenRambla();
-    void setenRambla(bool);
-    ~DtEntrenamiento();
-    virtual int cupo();
+private:
+  bool enRambla;
+public:
+  DtEntrenamiento(int, int, std::string, Turno, Inscripcion**, bool); //id, nombre, turno, enRambla
+  DtEntrenamiento(int, std::string, Turno, bool);
+  bool getenRambla();
+  void setenRambla(bool);
+  ~DtEntrenamiento();
+  virtual int cupo();
+  virtual std::ostream& operator<<(std::ostream&, const DtEntrenamiento&);
 };
 
 

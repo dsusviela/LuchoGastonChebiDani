@@ -21,7 +21,7 @@ public:
   void setcantBicicletas(int);
   ~DtSpinning();
   virtual int cupo();
-  //virtual std::ostream& operator<<(std::ostream&, const DtSpinning&);
+  friend std::ostream& operator<<(std::ostream&, DtSpinning& dt);
 
 };
 

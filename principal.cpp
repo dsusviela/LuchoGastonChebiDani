@@ -219,6 +219,7 @@ static void imprimir_socios(DtSocio **s, int tope) {
     std::cout << "Nombre: " << s[i]->getNombre() << std::endl;
     std::cout << "CI: " << s[i]->getCI() << std::endl;
   }
+  std::cout << " ====================== \n";
   std::cout << std::endl;
 }
 
@@ -386,7 +387,7 @@ int main() {
           throw(std::invalid_argument("La clase no esta registrada"));
         }
         borrarInscripcion(cedula_socio_adesinscribir, id_clase_adesinscribir);
-        std::cout << "Socio desinscripto exitosamente";
+        std::cout << "Socio desinscripto exitosamente. \n";
       } catch (const std::invalid_argument &ia) { responder_entrada_invalida(entrada); }
       break;
     }
@@ -453,7 +454,8 @@ int main() {
     }
     default:
     {
-      responder_entrada_invalida(entrada);
+      //responder_entrada_invalida(entrada);
+      std::cout << "Lo sentimos, lo ingresado no fue una entrada valida, intente de nuevo. \n";
       break;
     }
   } //switch

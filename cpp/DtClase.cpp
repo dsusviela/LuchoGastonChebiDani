@@ -9,6 +9,7 @@
 #include "../include/DtClase.h"
 #include "../include/inscripcion.h"
 
+/* Constructores */
 DtClase::DtClase(int i, std::string n, Turno t){
   this->id = i;
   this->anotados = 0;
@@ -25,6 +26,7 @@ DtClase::DtClase(int i, int a, std::string n, Turno t, Inscripcion **inscrip){
   this->inscripciones = inscrip;
 }
 
+/* Getters */
 int DtClase::getId(){
   return this->id;
 }
@@ -45,6 +47,7 @@ Inscripcion ** DtClase::getInscripciones(){
   return this->inscripciones;
 }
 
+/* Setters */
 void DtClase::setId(int x){
   this->id = x;
 }
@@ -57,4 +60,5 @@ void DtClase::setTurno(Turno t){
   this->turno = t;
 }
 
+/* Destructor */
 DtClase::~DtClase(){};

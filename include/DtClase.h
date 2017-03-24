@@ -21,7 +21,7 @@ class DtClase{
     Turno turno;
     Inscripcion **inscripciones;
   public:
-    DtClase(int = 1, int = 0, std::string = "nombre no inicializado", Turno = Manana);
+    DtClase(int = 1, std::string = "nombre no inicializado", Turno = Manana);
     DtClase(int, int, std::string, Turno, Inscripcion**);
     int getId();
     int getAnotados();

@@ -36,7 +36,7 @@ int tope_clases = 0;
 static bool existe_socio(int ci) {
   bool encontre = false;
   int i = 0;
-  while(i < tope_socios && encontre = false) {
+  while(i < tope_socios && encontre == false) {
     if(arreglo_socios[i]->getCI() == ci){
       encontre = true;
     }
@@ -45,7 +45,7 @@ static bool existe_socio(int ci) {
   return encontre;
 }
 
-void agregarSocio(int ci, string nombre){                               //1
+void agregarSocio(int ci, std::string nombre){                               //1
   Socio * ains = new Socio(ci, nombre);
   arreglo_socios[tope_socios] = ains;
   tope_socios++;
@@ -54,7 +54,7 @@ void agregarSocio(int ci, string nombre){                               //1
 static bool existe_clase(int id_clase){
   bool encontre = false;
   int i = 0;
-  while(i < tope_clases && encontre = false){
+  while(i < tope_clases && encontre == false){
     if(arreglo_clases[i]->getId() == id_clase){
       encontre = true;
     }
@@ -71,12 +71,12 @@ static void agregarSpinning(DtSpinning *clase_spinning){
                                                         clase_spinning->getcantBicicletas());
 }
 
-static void agregarEntrenamiento(DtSpinning *clase_entrenamiento){
+static void agregarEntrenamiento(DtEntrenamiento *clase_entrenamiento){
   arreglo_clases[tope_clases] = new Entrenamiento(clase_entrenamiento->getId(), //debug new
-                                                             clase_entrenamiento->getAnotados(),
-                                                             clase_entrenamiento->getNombre(),
-                                                             clase_entrenamiento->getTurno(),
-                                                             clase_entrenamiento->getenRambla());
+      clase_entrenamiento->getAnotados(),
+      clase_entrenamiento->getNombre(),
+      clase_entrenamiento->getTurno(),
+      clase_entrenamiento->getenRambla());
 }
 void agregarClase(const DtClase &clase){                                //2
   DtClase *aux = &clase;
@@ -157,7 +157,7 @@ void borrarInscripcion(int ciSocio, int idClase){                       //4
 DtSocio **obtenerInfoSociosPorClase(int idClase, int &cantSocios){ //5
   int i = 0;
   bool encontre = false;
-  while(i < tope_clases && encontre = false){
+  while(i < tope_clases && encontre == false){
     if(arreglo_clases[i]->getId() == idClase){
       encontre = true;
     }
@@ -166,7 +166,7 @@ DtSocio **obtenerInfoSociosPorClase(int idClase, int &cantSocios){ //5
   i--;
   Inscripcion** arreglo_ins = arreglo_clases[i]->getInscripciones();
   int tope = arreglo_clases[i]->getAnotados();
-  DtSocio** res = new *DtSocio[cantSocios];
+  DtSocio **res = new *DtSocio[cantSocios];
   for(int j = 0; j < tope; j ++){
     res[j] = new DtSocio(ins[j]->getSocio());
   }
@@ -212,7 +212,7 @@ DtClase obtenerClase(int idCLase){                                      //6
 
 //auxiliar para el main
 static void responder_entrada_invalida(int &entrada){
-  std::cout << "Lo sentimos, lo ingresado no fue una entrada valida, intente de nuevo. \n"
+  std::cout << "Lo sentimos, lo ingresado no fue una entrada valida, intente de nuevo. \n";
   std::cout << "Para registrar una clase de spinning presione 1. \n";
   std::cout << "Para registrar una clase de entrenamiento presione 2. \n";
   std::cout << "Para registrar una nueva clase de entrenamiento presione 2. \n";
@@ -228,7 +228,7 @@ static void responder_entrada_invalida(int &entrada){
 
 static void imprimir_socios(DtSocio **s, int tope) {
     for(int i = 0; i < tope; i++) {
-        std::cout << " ====================== \n"
+        std::cout << " ====================== \n";
         std::cout << "Nombre: " << s[i]->getNombre() << std::endl;
         std::cout << "CI: " << s[i]->getCI() << std::endl;
     }
@@ -284,7 +284,7 @@ int main(){
           agregarClase(clase_spinning_ains);
           std::cout << "Clase ingresada exitosamente. \n";
 
-        } catch(const std::invalid_argument &ia) {responder_entrada_invalida(entrada)};
+        } catch(const std::invalid_argument &ia) {responder_entrada_invalida(entrada);}
         break;
       }
       //nuevo entrenamiento
@@ -311,7 +311,7 @@ int main(){
           agregarClase(clase_entrenamiento_ains);
           std::cout << "Clase ingresada exitosamente." << std::endl;
 
-        } catch(const std::invalid_argument &ia) {responder_entrada_invalida(entrada)};
+        } catch(const std::invalid_argument &ia) {responder_entrada_invalida(entrada);}
         break;
       }
       //nuevo socio
@@ -329,7 +329,7 @@ int main(){
           std::getline(cin, nombre_socio);
           agregarSocio(cedula_socio, nombre_socio);
           std::cout << "Socio registrado exitosamente" << std::endl;
-        }catch(const std::invalid_argument &ia) {responder_entrada_invalida(entrada)}
+        }catch(const std::invalid_argument &ia) {responder_entrada_invalida(entrada);}
         break;
       }
       //inscribir socio a una clase
@@ -356,7 +356,7 @@ int main(){
           }
           agregarInscripcion(cedula_socio_ainscribir, id_clase_ainscribir, fecha_inscripcion);
           std::cout << "Socio inscripto exitosamente. \n";
-        }catch(const std::invalid_argument &ia) {responder_entrada_invalida(entrada)}
+        }catch(const std::invalid_argument &ia) {responder_entrada_invalida(entrada);}
         break;
       }
       //desinscribir socio de clase
@@ -381,7 +381,7 @@ int main(){
           }
           borrarInscripcion(cedula_socio_adesinscribir, id_clase_adesinscribir);
           std::cout << "Socio desinscripto exitosamente";
-        }catch(const std::invalid_argument &ia) {responder_entrada_invalida(entrada)}
+        }catch(const std::invalid_argument &ia) {responder_entrada_invalida(entrada);}
         break;
       }
       //desplegar informacion, no se hasta que punto podemos sobrecargar el operador
@@ -398,7 +398,7 @@ int main(){
           std::cout << obtenerClase(id_clase_adesplegar);
           std::cout << std::endl; //por las dudas del sobrecargado
           std::cout << "Informacion desplegada exitosamente. \n";
-        }catch(const std::invalid_argument &ia) {responder_entrada_invalida(entrada)}
+        }catch(const std::invalid_argument &ia) {responder_entrada_invalida(entrada);}
         break;
       }
       //desplegar todos los socios de una clase
@@ -422,7 +422,7 @@ int main(){
           };
           k--;
           int cSocios = arreglo_clases[k]->getAnotados();
-          if(cSocios = 0){
+          if(cSocios == 0){
             std::cout << "La clase no tiene ningun socio inscripto. \n";
           } else {
             DtSocio **socios_aimprimir = obtenerInfoSociosPorClase(id_clase_adesplegar,cSocios);
@@ -430,7 +430,7 @@ int main(){
             imprimir_socios(socios_aimprimir, cSocios);
           }
           std::cout << "Informacion desplegada exitosamente. \n";
-        }catch(const std::invalid_argument &ia) {responder_entrada_invalida(entrada)}
+        }catch(const std::invalid_argument &ia) {responder_entrada_invalida(entrada);}
         break;
       }
       //cerrar programa

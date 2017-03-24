@@ -21,3 +21,45 @@
 
 
 # --------------------------------------------------------------------
+
+# Objetivo predeterminado (no se necesita especificarlo al invocar `make`).
+all: principal
+
+# Objetivos que no son archivos.
+.PHONY: all clean_bin clean_test clean testing
+
+
+# directorios
+HDIR    = include
+CPPDIR  = cpp
+ODIR    = obj
+
+TESTDIR = test
+
+MODULOS = clase DtClase DtEntrenamiento DtSocio DtSpinning entrenamiento fecha inscripcion socio spinning
+
+# lista de archivos, con directorio y extensión
+HS   = $(MODULOS:%=$(HDIR)/%.hpp)
+CPPS = $(MODULOS:%=$(CPPDIR)/%.cpp)
+OS   = $(MODULOS:%=$(ODIR)/%.o)
+
+PRINCIPAL=principal
+EJECUTABLE=principal
+
+LIB=../tarea1p4.a
+
+# compilador
+CC = g++
+# opciones de compilación
+CCFLAGS = -Wall -Werror -I$(HDIR) -g #-DNDEBUG
+# se debe remover o agregar la directiva -DNDEBUG para que las llamadas a
+# `assert' tengan  efecto o no.
+
+$(ODIR)/$(PRINCIPAL).o:$(PRINCIPAL).cpp
+	$(CC) $(CCFLAGS) -c $< -o $@
+
+# cada .o depende de su .cpp
+# $@ se expande para tranformarse en el objetivo
+# $< se expande para tranformarse en la primera dependencia
+$(ODIR)/%.o: $(CPPDIR)/%.cpp $(HDIR)/%.hpp
+	$(CC) $(CCFLAGS) -c $< -o $@

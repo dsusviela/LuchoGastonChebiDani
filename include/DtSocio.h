@@ -16,6 +16,7 @@ public:
   DtSocio(int = 1, std::string = "No se ingreso nombre");
   std::string getNombre();
   void setCI(int);
+  int getCI();
   void setNombre(std::string);
 };
 

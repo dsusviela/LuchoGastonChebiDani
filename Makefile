@@ -36,7 +36,7 @@ ODIR    = obj
 
 TESTDIR = test
 
-MODULOS = clase DtClase DtEntrenamiento DtSocio DtSpinning entrenamiento fecha inscripcion socio spinning
+MODULOS = clase DtClase DtEntrenamiento DtSocio DtSpinning entrenamiento fecha inscripcion socio spinning turno
 
 # lista de archivos, con directorio y extensión
 HS   = $(MODULOS:%=$(HDIR)/%.hpp)
@@ -63,3 +63,6 @@ $(ODIR)/$(PRINCIPAL).o:$(PRINCIPAL).cpp
 # $< se expande para tranformarse en la primera dependencia
 $(ODIR)/%.o: $(CPPDIR)/%.cpp $(HDIR)/%.hpp
 	$(CC) $(CCFLAGS) -c $< -o $@
+	OS_LIB=$(filter-out obj/principal.o, $(OS))
+	$(LIB):$(ODIR)/$(PRINCIPAL).o $(OS_LIB)
+		ar -qc $@ $^

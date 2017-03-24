@@ -9,11 +9,11 @@
 #include "../include/DtEntrenamiento.h"
 #include "../include/inscripcion.h"
 
-DtEntrenamiento::DtEntrenamiento(int x, int a, std::string s, Turno t,
+/*DtEntrenamiento::DtEntrenamiento(int x, int a, std::string s, Turno t,
     Inscripcion **i, bool b) :
     DtClase(x, a, s, t, i) {
   this->enRambla = b;
-}
+}*/
 
 DtEntrenamiento::DtEntrenamiento(int x, std::string s, Turno t, bool b) :
     DtClase(x, s, t) {
@@ -38,4 +38,3 @@ std::ostream& DtEntrenamiento::operator<<(std::ostream& o, const DtEntrenamiento
     o << "En rambla: No" << std::endl;
   return o;
 }
-

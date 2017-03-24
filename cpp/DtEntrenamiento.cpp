@@ -28,8 +28,7 @@ void DtEntrenamiento::setenRambla(bool b) {
   this->enRambla = b;
 }
 
-std::ostream& DtEntrenamiento::operator<<(std::ostream& o,
-    const DtEntrenamiento& dt) {
+std::ostream& DtEntrenamiento::operator<<(std::ostream& o, const DtEntrenamiento& dt) {
   o << "ID Clase: " << this->getId() << std::endl;
   o << "Nombre: " << this->nombre << std::endl;
   o << "Turno: " << this->turno << std::endl;

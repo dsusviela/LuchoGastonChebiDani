@@ -178,13 +178,14 @@ DtClase obtenerClase(int idClase) {                                      //6
   i--;
   Clase *aux = arreglo_clases[i];
   Entrenamiento *es_entrenamiento = dynamic_cast<Entrenamiento *>(aux);
+  Spinning *es_spinning = dynamic_cast<Spinning *>(aux);
   if (es_entrenamiento) {                        // Si es entrenamiento
     int idres = arreglo_clases[i]->getId();
     int anotadosres = arreglo_clases[i]->getAnotados();
     std::string nombreres = arreglo_clases[i]->getNombre();
     Turno turnores = arreglo_clases[i]->getTurno();
     Inscripcion *inscripcionres = arreglo_clases[i]->getInscripciones();
-    bool enRamblares = arreglo_clases[i]->getenRambla();
+    bool enRamblares = es_entrenamiento->getenRambla();
     DtEntrenamiento res = DtEntrenamiento(idres, anotadosres, nombreres,
         turnores, enRamblares); // No tiene parametro inscripcion el constructor???
   } else {
@@ -193,7 +194,7 @@ DtClase obtenerClase(int idClase) {                                      //6
     std::string nombreres = arreglo_clases[i]->getNombre();
     Turno turnores = arreglo_clases[i]->getTurno();
     Inscripcion *inscripcionres = arreglo_clases[i]->getInscripciones();
-    int cantbicicletasres = arreglo_clases[i]->getcantBicicletas();
+    int cantbicicletasres = es_spinning->getcantBicicletas();
     DtSpinning res = DtSpinning(idres, anotadosres, nombreres, turnores,
         cantbicicletasres);
   }
@@ -239,6 +240,13 @@ int main() {
   int entrada;
   std::cout << "Bienvenido al software del manejo del gimnasio del InCo-FIng.\n";
 
+  int identificacion_spinning, identificacion_entrenamiento, cantidad_bicicletas,
+    cedula_socio, cedula_socio_ainscribir, id_clase_ainscribir, dia, mes, year,
+    cedula_socio_adesinscribir, id_clase_adesinscribir, id_clase_adesplegar;
+  Turno turno_clase_spinning, turno_clase_entrenamiento;
+  std::string nombre_clase_spinning, nombre_clase_entrenamiento, nombre_socio;
+  bool clase_en_rambla;
+
   while (execute) {
     std::cout << "Para registrar una nueva clase de spinning presione 1. \n";
     std::cout << "Para registrar una nueva clase de entrenamiento presione 2. \n";
@@ -265,7 +273,7 @@ int main() {
               "La clase que se desea ingresar ya existe en el sistema"); //tira la excepcion
         }
         std::cout << "Ingrese el nombre de la clase. \n";
-        std::getline(cin, nombre_clase_spinning);
+        std::getline(std::cin, nombre_clase_spinning);
         std::cout << "Ingrese el turno en el cual se desarrolla la clase. \n";
         std::cin >> turno_clase_spinning;
         std::cout << "Ingrese la cantidad de bicicletas con las que cuenta la clase: \n";
@@ -276,14 +284,14 @@ int main() {
           throw std::invalid_argument(
               "No se puede ingresar un numero de bicicletas mayor a 50"); //tira la excepcion
         }
-        DtClase *clase_spinning_ains = new DtSpinning(identificacion_spinning,
-            nombre_clase_spinning, turno_clase_spinning, cantidad_bicicletas);
+        DtSpinning clase_spinning_ains = DtSpinning(identificacion_spinning,
+            cantidad_bicicletas, turno_clase_spinning, cantidad_bicicletas);
         agregarClase(clase_spinning_ains);
-        std::cout << "Clase ingresada exitosamente. \n";
 
       } catch (const std::invalid_argument &ia) {
         responder_entrada_invalida(entrada);
       }
+      std::cout << "Clase ingresada exitosamente. \n";
       break;
     }
       //nuevo entrenamiento
@@ -298,20 +306,17 @@ int main() {
           throw(std::invalid_argument("La clase que se desea ingresar ya existe en el sistema"));//tira la excepcion
         }
         std::cout << "Ingrese el nombre de la clase. \n";
-        std::getline(cin, nombre_clase_entrenamiento);
+        std::getline(std::cin, nombre_clase_entrenamiento);
         std::cout << "Ingrese el turno en el cual se desarrolla la clase. \n";
         std::cin >> turno_clase_entrenamiento;
-        std::cout << "Ingrese si la clase se desarrolla en la rambla. \n";
+        std::cout << "Ingrese si la clase se desarrolla en la rambla: 1 para Si o 0 para no. \n";
         std::cin >> clase_en_rambla;
-      }
-      DtClase *clase_entrenamiento_ains = new DtSpinning(identificacion_entrenamiento, nombre_clase_entrenamiento,
+      } catch(const std::invalid_argument &ia) {responder_entrada_invalida(entrada);}
+
+      DtEntrenamiento clase_entrenamiento_ains = DtEntrenamiento(identificacion_entrenamiento, nombre_clase_entrenamiento,
           turno_clase_entrenamiento, clase_en_rambla);
-      agregarSpinning (clase_entrenamiento_ains);
       agregarClase(clase_entrenamiento_ains);
       std::cout << "Clase ingresada exitosamente." << std::endl;
-
-    }
-      catch(const std::invalid_argument &ia) {responder_entrada_invalida(entrada);}
       break;
     }
     //nuevo socio
@@ -327,7 +332,7 @@ int main() {
           throw(std::invalid_argument("El socio ya se encuentra registrado")); //tira la excepcion
         }
         std::cout << "Ingrese el nombre del socio. \n";
-        std::getline(cin, nombre_socio);
+        std::getline(std::cin, nombre_socio);
         agregarSocio(cedula_socio, nombre_socio);
         std::cout << "Socio registrado exitosamente" << std::endl;
       } catch (const std::invalid_argument &ia) {
@@ -353,7 +358,7 @@ int main() {
         }
         std::cout << "Ingrese la fecha de inscripcion. Dia Mes Year. \n";
         std::cin >> dia >> mes >> year;
-        fecha fecha_inscripcion = Fecha(dia, mes, year);
+        Fecha fecha_inscripcion = Fecha(dia, mes, year);
         if (es_valida_fecha(fecha_inscripcion)) {
           std::cin.clear(); //resetea las flags de error
           std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); //ignora toda la entrada invalida hasta el fin de linea
@@ -381,9 +386,8 @@ int main() {
           std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); //ignora toda la entrada invalida hasta el fin de linea
           throw(std::invalid_argument("El socio no esta registrado"));
         }
-        std::cout
-            << "Ingrese el identificador de la clase a la que se desea desinscribir. \n";
-        std::getline(cin, id_clase_adesinscribir);
+        std::cout << "Ingrese el identificador de la clase a la que se desea desinscribir. \n";
+        std::cin >> id_clase_adesinscribir;
         if (!existe_clase(id_clase_adesinscribir)) {
           std::cin.clear(); //resetea las flags de error
           std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); //ignora toda la entrada invalida hasta el fin de linea
@@ -430,8 +434,8 @@ int main() {
         }
         bool encontrado = false;
         int k = 0;
-        while (i < tope_clases && encontrado = false) {
-          if (arreglo_clases[k]->getId() == idClase) {
+        while (k < tope_clases && encontrado == false) {
+          if (arreglo_clases[k]->getId() == id_clase_adesplegar) {
             encontrado = true;
           }
           k++;

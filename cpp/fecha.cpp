@@ -5,7 +5,7 @@
 #include <string>
 #include <iostream>
 
-#include "../include/fecha.h/"
+#include "../include/fecha.h"
 
 Fecha::Fecha(int dia, int mes, int anio) {
   this->dia = dia;

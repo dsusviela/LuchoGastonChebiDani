@@ -34,26 +34,22 @@ HDIR    = include
 CPPDIR  = cpp
 ODIR    = obj
 
-TESTDIR = test
-
 MODULOS = clase DtClase DtEntrenamiento DtSocio DtSpinning entrenamiento fecha inscripcion socio spinning turno
 
 # lista de archivos, con directorio y extensión
-HS   = $(MODULOS:%=$(HDIR)/%.hpp)
+HS   = $(MODULOS:%=$(HDIR)/%.h)
 CPPS = $(MODULOS:%=$(CPPDIR)/%.cpp)
 OS   = $(MODULOS:%=$(ODIR)/%.o)
 
 PRINCIPAL=principal
 EJECUTABLE=principal
 
-LIB=../tarea1p4.a
-
 # compilador
 CC = g++
 # opciones de compilación
-CCFLAGS = -Wall -Werror -I$(HDIR) -g #-DNDEBUG
-# se debe remover o agregar la directiva -DNDEBUG para que las llamadas a
-# `assert' tengan  efecto o no.
+CCFLAGS = -Wall -Werror -I$(HDIR) -g -frtti
+# -DNDEBUG
+# se agrega esta opción para que no las llamadas a assert no hagan nada.
 
 $(ODIR)/$(PRINCIPAL).o:$(PRINCIPAL).cpp
 	$(CC) $(CCFLAGS) -c $< -o $@
@@ -61,8 +57,9 @@ $(ODIR)/$(PRINCIPAL).o:$(PRINCIPAL).cpp
 # cada .o depende de su .cpp
 # $@ se expande para tranformarse en el objetivo
 # $< se expande para tranformarse en la primera dependencia
-$(ODIR)/%.o: $(CPPDIR)/%.cpp $(HDIR)/%.hpp
+$(ODIR)/%.o: $(CPPDIR)/%.cpp $(HDIR)/%.h
 	$(CC) $(CCFLAGS) -c $< -o $@
-	OS_LIB=$(filter-out obj/principal.o, $(OS))
-	$(LIB):$(ODIR)/$(PRINCIPAL).o $(OS_LIB)
-		ar -qc $@ $^
+
+# $^ se expande para tranformarse en todas las dependencias
+$(EJECUTABLE): $(ODIR)/$(PRINCIPAL).o $(OS)
+	$(CC) $(CCFLAGS) $^ -o $@

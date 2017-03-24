@@ -5,6 +5,7 @@
 #include <stdexcept>
 #include <string>
 #include <iostream>
+#include <map>
 
 #include "include/clase.h"
 #include "include/entrenamiento.h"
@@ -183,7 +184,7 @@ DtClase obtenerClase(int idClase) {                                      //6
   Spinning *es_spinning = dynamic_cast<Spinning *>(aux);
   if (es_entrenamiento) {                        // Si es entrenamiento
     int idres = arreglo_clases[i]->getId();
-    int anotadosres = arreglo_clases[i]->getAnotados();
+//    int anotadosres = arreglo_clases[i]->getAnotados();
     std::string nombreres = arreglo_clases[i]->getNombre();
     Turno turnores = arreglo_clases[i]->getTurno();
 
@@ -223,14 +224,14 @@ static void responder_entrada_invalida(int &entrada) {
   std::cin >> entrada;
 }
 
-static void imprimir_socios(DtSocio **s, int tope) {
+/*static void imprimir_socios(DtSocio **s, int tope) {
   for (int i = 0; i < tope; i++) {
     std::cout << " ====================== \n";
     std::cout << "Nombre: " << s[i]->getNombre() << std::endl;
     std::cout << "CI: " << s[i]->getCI() << std::endl;
   }
   std::cout << std::endl;
-}
+}*/
 
 //-----------------------------------------------------------------------
 //CODGIO PRINCIPAL
@@ -243,11 +244,18 @@ int main() {
 
   int identificacion_spinning, identificacion_entrenamiento, cantidad_bicicletas,
     cedula_socio, cedula_socio_ainscribir, id_clase_ainscribir, dia, mes, year,
-    cedula_socio_adesinscribir, id_clase_adesinscribir, id_clase_adesplegar;
+    cedula_socio_adesinscribir, id_clase_adesinscribir /*id_clase_adesplegar*/;
+
   Turno turno_clase_spinning, turno_clase_entrenamiento;
-  std::string nombre_clase_spinning, nombre_clase_entrenamiento, nombre_socio;
+  std::map<std::string, Turno> m;
+  m["Manana"] = Manana;
+  m["Tarde"] = Tarde;
+  m["Noche"] = Noche;
+
+  std::string nombre_clase_spinning, nombre_clase_entrenamiento, nombre_socio,
+              taux_spinning,  taux_entrenamiento;
+
   bool clase_en_rambla;
-  Turno turno_clase_spinning, turno_clase_entrenamiento;
 
   while (execute) {
     std::cout << "Para registrar una nueva clase de spinning presione 1. \n";
@@ -270,26 +278,24 @@ int main() {
         std::cin >> identificacion_spinning;
         if (existe_clase (identificacion_spinning)) {
           std::cin.clear(); //resetea las flags de error
-
           throw std::invalid_argument(
               "La clase que se desea ingresar ya existe en el sistema"); //tira la excepcion
         }
         std::cout << "Ingrese el nombre de la clase. \n";
         std::getline(std::cin, nombre_clase_spinning);
         std::cout << "Ingrese el turno en el cual se desarrolla la clase. \n";
-        std::cin >> turno_clase_spinning;
+        std::cin >> taux_spinning;
+        turno_clase_spinning = m[taux_spinning];
         std::cout << "Ingrese la cantidad de bicicletas con las que cuenta la clase: \n";
         std::cin >> cantidad_bicicletas;
         if (cantidad_bicicletas > 50) {
           std::cin.clear(); //resetea las flags de error
-
           throw std::invalid_argument(
               "No se puede ingresar un numero de bicicletas mayor a 50"); //tira la excepcion
         }
-        DtSpinning clase_spinning_ains = DtSpinning(identificacion_spinning,
-            cantidad_bicicletas, turno_clase_spinning, cantidad_bicicletas);
+        DtSpinning clase_spinning_ains = DtSpinning(identificacion_spinning, nombre_clase_spinning,
+                                                    turno_clase_spinning, cantidad_bicicletas);
         agregarClase(clase_spinning_ains);
-
       } catch (const std::invalid_argument &ia) {
         responder_entrada_invalida(entrada);
       }
@@ -304,19 +310,18 @@ int main() {
         std::cin >> identificacion_entrenamiento;
         if (existe_clase(identificacion_entrenamiento)) {
           std::cin.clear(); //resetea las flags de error
-          std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');//ignora toda la entrada invalida
           throw(std::invalid_argument("La clase que se desea ingresar ya existe en el sistema"));//tira la excepcion
         }
         std::cout << "Ingrese el nombre de la clase. \n";
         std::getline(std::cin, nombre_clase_entrenamiento);
         std::cout << "Ingrese el turno en el cual se desarrolla la clase. \n";
-        std::cin >> turno_clase_entrenamiento;
+        std::cin >> taux_entrenamiento;
+        turno_clase_entrenamiento = m[taux_entrenamiento];
         std::cout << "Ingrese si la clase se desarrolla en la rambla: 1 para Si o 0 para no. \n";
         std::cin >> clase_en_rambla;
       } catch(const std::invalid_argument &ia) {responder_entrada_invalida(entrada);}
 
-      DtEntrenamiento clase_entrenamiento_ains = DtEntrenamiento(identificacion_entrenamiento, nombre_clase_entrenamiento,
-          turno_clase_entrenamiento, clase_en_rambla);
+      DtEntrenamiento clase_entrenamiento_ains = DtEntrenamiento(identificacion_entrenamiento, nombre_clase_entrenamiento, turno_clase_entrenamiento, clase_en_rambla);
       agregarClase(clase_entrenamiento_ains);
       std::cout << "Clase ingresada exitosamente." << std::endl;
       break;
@@ -385,7 +390,6 @@ int main() {
         std::cin >> cedula_socio_adesinscribir;
         if (!existe_socio(cedula_socio_adesinscribir)) {
           std::cin.clear(); //resetea las flags de error
-            hasta el fin de linea
           throw(std::invalid_argument("El socio no esta registrado"));
         }
         std::cout << "Ingrese el identificador de la clase a la que se desea desinscribir. \n";
@@ -402,7 +406,7 @@ int main() {
       break;
     }
     //desplegar informacion, no se hasta que punto podemos sobrecargar el operador
-    case 6:
+/*    case 6:
     {
       std::cout << "Desplegaremos la informacion de la clase deseada. \n";
       try {
@@ -455,7 +459,7 @@ int main() {
         responder_entrada_invalida(entrada);
       }
       break;
-    }
+    }*/
     //cerrar programa
     case 0:
     {

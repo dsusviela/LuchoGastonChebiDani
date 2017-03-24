@@ -17,7 +17,7 @@ Fecha Inscripcion::getFecha() {
 }
 
 DtSocio Inscripcion::getSocio() {
-  return DtSocio(this->socio);
+  return DtSocio(this->socio->getCI(), this->socio->getNombre());
 }
 
 void Inscripcion::setFecha(Fecha f) {

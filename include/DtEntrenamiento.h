@@ -18,9 +18,9 @@ public:
   DtEntrenamiento(int, std::string, Turno, bool);
   bool getenRambla();
   void setenRambla(bool);
-  ~DtEntrenamiento();
+//  ~DtEntrenamiento();
   virtual int cupo();
-  virtual std::ostream& operator<<(std::ostream&, const DtEntrenamiento&);
+  //virtual std::ostream& operator<<(std::ostream&, const DtEntrenamiento&);
 };
 
 #endif /* INCLUDE_DTENTRENAMIENTO_H_ */

@@ -11,11 +11,11 @@
 #include "../include/DtSpinning.h"
 
 /* Constructores */
-DtSpinning::DtSpinning(int x, int a, std::string s, Turno t, Inscripcion **i,
+/*DtSpinning::DtSpinning(int x, int a, std::string s, Turno t, Inscripcion **i,
     int c) :
     Clase(x, a, s, t, i) {
   this->cantBicicletas = c;
-}
+}*/
 
 DtSpinning::DtSpinning(int x, std::string s, Turno t, int c) :
     DtClase(x, s, t) {
@@ -32,11 +32,15 @@ void DtSpinning::setcantBicicletas(int cant) {
   this->cantBicicletas = cant;
 }
 
+int DtSpinning::cupo() {
+  return cantBicicletas - this->getAnotados();
+}
+
 /* Funcionalidad */
-std::ostream& DtSpinning::operator<<(std::ostream& o, const DtSpinning& dt) {
+/*std::ostream& DtSpinning::operator<<(std::ostream& o, const DtSpinning& dt) {
   o << "ID Clase: " << this->getId() << std::endl;
   o << "Nombre: " << this->nombre << std::endl;
   o << "Turno: " << this->turno << std::endl;
   o << "Cantidad de bicicletas: " << this->cantBicicletas << std::endl;
   return o;
-}
+}*/

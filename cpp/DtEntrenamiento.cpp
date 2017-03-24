@@ -28,7 +28,13 @@ void DtEntrenamiento::setenRambla(bool b) {
   this->enRambla = b;
 }
 
-std::ostream& DtEntrenamiento::operator<<(std::ostream& o, const DtEntrenamiento& dt) {
+int DtEntrenamiento::cupo() {
+  if (enRambla)
+    return 20 - this->getAnotados();
+  else
+    return 10 - this->getAnotados();
+}
+/*std::ostream& DtEntrenamiento::operator<<(std::ostream& o, const DtEntrenamiento& dt) {
   o << "ID Clase: " << this->getId() << std::endl;
   o << "Nombre: " << this->nombre << std::endl;
   o << "Turno: " << this->turno << std::endl;
@@ -37,4 +43,4 @@ std::ostream& DtEntrenamiento::operator<<(std::ostream& o, const DtEntrenamiento
   else
     o << "En rambla: No" << std::endl;
   return o;
-}
+}*/

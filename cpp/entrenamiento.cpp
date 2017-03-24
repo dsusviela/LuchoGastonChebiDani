@@ -9,9 +9,7 @@
 #include "../include/entrenamiento.h"
 #include "../include/inscripcion.h"
 
-Entrenamiento::Entrenamiento(int x, int a, std::string s, Turno t,
-    Inscripcion **i, bool b) :
-    Clase(x, a, s, t, i) {
+Entrenamiento::Entrenamiento(int x, int a, std::string s, Turno t, Inscripcion **i, bool b) : Clase(x, a, s, t, i) {
   this->enRambla = b;
 }
 
@@ -30,8 +28,7 @@ void Entrenamiento::setenRambla(bool b) {
 
 int Entrenamiento::cupo() {
   if (enRambla)
-    return 20 - anotados;
+    return 20 - this->getAnotados();
   else
-    return 10 - anotados;
+    return 10 - this->getAnotados();
 }
-

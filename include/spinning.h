@@ -24,4 +24,4 @@ public:
   virtual int cupo();
 };
 
-#endif;
+#endif

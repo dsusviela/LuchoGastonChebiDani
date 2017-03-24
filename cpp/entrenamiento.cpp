@@ -32,3 +32,5 @@ int Entrenamiento::cupo() {
   else
     return 10 - this->getAnotados();
 }
+
+Entrenamiento::~Entrenamiento(){}

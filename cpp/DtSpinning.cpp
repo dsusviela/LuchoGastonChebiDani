@@ -44,3 +44,5 @@ int DtSpinning::cupo() {
   o << "Cantidad de bicicletas: " << this->cantBicicletas << std::endl;
   return o;
 }*/
+
+DtSpinning::~DtSpinning(){}

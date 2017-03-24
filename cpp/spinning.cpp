@@ -30,3 +30,5 @@ void Spinning::setcantBicicletas(int cant) {
 int Spinning::cupo() {
   return cantBicicletas - this->getAnotados();
 }
+
+Spinning::~Spinning(){}

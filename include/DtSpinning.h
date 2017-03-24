@@ -19,7 +19,7 @@ public:
   DtSpinning(int, std::string, Turno, int);
   int getcantBicicletas();
   void setcantBicicletas(int);
-  //~DtSpinning();
+  ~DtSpinning();
   virtual int cupo();
   //virtual std::ostream& operator<<(std::ostream&, const DtSpinning&);
 

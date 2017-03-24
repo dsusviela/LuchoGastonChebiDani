@@ -44,3 +44,4 @@ int DtEntrenamiento::cupo() {
     o << "En rambla: No" << std::endl;
   return o;
 }*/
+DtEntrenamiento::~DtEntrenamiento(){}

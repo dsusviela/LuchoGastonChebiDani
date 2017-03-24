@@ -12,26 +12,20 @@
 #include "../include/DtClase.h"
 #include "../include/inscripcion.h"
 
-DtClase::DtClase(int i, int a, std::string n, Turno t){
+DtClase::DtClase(int i, std::string n, Turno t){
   this->id = i;
-  this->anotados = a;
+  this->anotados = 0;
   this->nombre = n;
   this->turno = t;
-
-  for(int j = 0; j < 50; j++){
-    this->inscripciones[j] = NULL;
-  }
+  this->inscripciones = new *Inscripcion[50];
 }
 
-DtClase::DtClase(int i, int a, std::string n, Turno t, Inscripcion* inscrip){
+DtClase::DtClase(int i, int a, std::string n, Turno t, Inscripcion **inscrip){
   this->id = i;
   this->anotados = a;
   this->nombre = n;
   this->turno = t;
-
-  for(int j = 0; j < 50; j++) {         //copia el arreglo
-    this->inscripciones[j] = inscrip[j];
-  }
+  this->inscripciones = inscrip;
 }
 
 int DtClase::getId(){
@@ -39,7 +33,7 @@ int DtClase::getId(){
 }
 
 int DtClase::getAnotados(){
-  return this->anotados;
+    return this->anotados;
 }
 
 std::string DtClase::getNombre(){
@@ -50,12 +44,8 @@ Turno DtClase::getTurno(){
     return this->turno;
 }
 
-Inscripcion* DtClase::getInscripciones(){
-  Inscripcion* inscrip[50];
-  for(int j = 0; j < 50; j++) {
-    this->inscripciones[j] = inscrip[j];
-  }
-  return inscrip;
+Inscripcion ** DtClase::getInscripciones(){
+    return this->inscripciones;
 }
 
 void DtClase::setId(int x){

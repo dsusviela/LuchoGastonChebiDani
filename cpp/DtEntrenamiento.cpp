@@ -9,13 +9,12 @@
 #include "../include/DtEntrenamiento.h"
 #include "../include/inscripcion.h"
 
-DtEntrenamiento::DtEntrenamiento(int x, int a, std::string s, Turno t, bool b){
-    this->id = x;
-    this->anotados = a;
-    this->nombre = s;
-    this->turno = t;
-    //this->inscriptos = i ?
-    this->enRambla = b;
+DtEntrenamiento::DtEntrenamiento(int x,int a,std::string s,Turno t,Inscripcion **i,bool b) : DtClase(x,a,s,t,i){
+	this->enRambla = b;
+}
+
+DtEntrenamiento::DtEntrenamiento(int x,std::string s,Turno t,bool b) : DtClase(x,s,t){
+	this->enRambla = b;
 }
 
 bool DtEntrenamiento::getenRambla(){

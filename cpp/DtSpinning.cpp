@@ -10,14 +10,13 @@
 #include "../include/DtSpinning.h"
 
 
-DtSpinning::DtSpinning(int id,string s,Turno t,Inscripcion *i,int cant){
-    this->id = id;
-    this->nombre = s;
-    this->turno = t;
-    //this->inscriptos = i;
-    this->cantBicicletas = cant;
+DtSpinning::DtSpinning(int x,int a,std::string s,Turno t,Inscripcion **i,int c) : Clase(x,a,s,t,i){
+	this->cantBicicletas = c;
 }
 
+DtSpinning::DtSpinning(int x,std::string s,Turno t,int c) : DtClase(x,s,t){
+	this->cantBicicletas = c;
+}
 int DtSpinning::getcantBicicletas(){
     return this->cantBicicletas;
 }

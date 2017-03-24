@@ -19,15 +19,15 @@ class DtClase{
     int anotados;
     std::string nombre;
     Turno turno;
-    Inscripcion* inscripciones[50];
+    Inscripcion **inscripciones;
   public:
     DtClase(int = 1, int = 0, std::string = "nombre no inicializado", Turno = Manana);
-    DtClase(int, int, std::string, Turno, Inscripcion*);
+    DtClase(int, int, std::string, Turno, Inscripcion**);
     int getId();
     int getAnotados();
     std::string getNombre();
     Turno getTurno();
-    Inscripcion* getInscripciones();
+    Inscripcion **getInscripciones();
     void setId(int);
     void setNombre(std::string);
     void setTurno(Turno);

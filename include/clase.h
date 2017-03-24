@@ -28,20 +28,21 @@ class Clase{
     int anotados;
     std::string nombre;
     Turno turno;
-    Inscripcion* inscripciones[50];
+    Inscripcion **inscripciones;
   public:
-    Clase(int, std::string, Turno, Inscripcion*);
-    virtual int cupo() = 0; //se hace asi para que sea abstracta?
+    Clase(int, int, std::string, Turno, Inscripcion **);
+    virtual int cupo() = 0; 
     int getId();
     int getAnotados();
     std::string getNombre();
     Turno getTurno();
-    Inscripcion* getInscripciones();
-    DtClase getData();
+    Inscripcion **getInscripciones();
+    virtual DtClase getData();
     void setId(int);
     void setNombre(std::string);
     void setTurno(Turno);
-    void agregarInscripcion(Inscripcion);
+    void agregarInscripcion(Inscripcion *);
+    void borrarInscripcion(int pos);
     virtual ~Clase();
 };
 

@@ -1,4 +1,4 @@
-/*
+*
 Modulo de implementacion de principal.cpp
 */
 
@@ -25,15 +25,11 @@ Modulo de implementacion de principal.cpp
 //el que se quiera animar al Dynamic Cast
 //http://stackoverflow.com/questions/2253168/dynamic-cast-and-static-cast-in-c
 //pero que lo haga en otra branch, yo no entendi nada....
-struct nodo_clases{
-  Clase *info_clase;
-  bool es_entrenamiento;
-}
 
 Socio *arreglo_socios[MAX_SOCIOS];
 int tope_socios = 0;
 
-nodo_clases *arreglo_clases[MAX_CLASES];
+Clase *arreglo_clases[MAX_CLASES];
 int tope_clases = 0;
 
 //funciones a implementar con sus axuliares
@@ -50,41 +46,47 @@ static bool existe_socio(int ci) {
 }
 
 void agregarSocio(int ci, string nombre){                               //1
-  arreglo_socios[tope_socios] = Socio(ci, nombre);  // No deberia ser un puntero?   CH
+  Socio * ains = new Socio(ci, nombre);
+  arreglo_socios[tope_socios] = ains;
   tope_socios++;
 }
 
-static bool existe_clase(DtClase clase){
+static bool existe_clase(int id_clase){
   bool encontre = false;
   int i = 0;
   while(i < tope_clases && encontre = false){
-    if(arreglo_clases[i].info_clase->getId() == clase.getId()){
+    if(arreglo_clases[i]->getId() == id_clase){
       encontre = true;
     }
     i++;
   }
-  return encontre;
+  return encontre; 
 }
 
-static void agregarSpinning(const DtSpinning &clase_spinning){
-  arreglo_clases[tope_clases].info_clase = *Spinning(clase_spinning.getId(),//no confundir -> con . aca accedo a un struct, va punto. debug *Spinning
-                                                    clase_spinning.getAnotados(),
-                                                    clase_spinning.getNombre(),
-                                                    clase_spinning.getTurno(),
-                                                    clase_spinning.getcantBicicletas());
-  arreglo_clases[tope_clases].es_entrenamiento = false;
+static void agregarSpinning(DtSpinning *clase_spinning){
+  arreglo_clases[tope_clases] = new Spinning(clase_spinning->getId(), //debug new
+                                                        clase_spinning->getAnotados(),
+                                                        clase_spinning->getNombre(),
+                                                        clase_spinning->getTurno(),
+                                                        clase_spinning->getcantBicicletas());
 }
 
-static void agregarEntrenamiento(const DtSpinning &clase_entrenamiento){
-  arreglo_clases[tope_clases].info_clase = *Entrenamiento(clase_entrenamiento.getId(),
-                                                          clase_entrenamiento.getAnotados(),
-                                                          clase_entrenamiento.getNombre(),
-                                                          clase_entrenamiento.getTurno(),
-                                                          clase_entrenamiento.getenRambla());
-  arreglo_clases[tope_clases].es_entrenamiento = true;  //no es un puntero, estoy accediendo al campo del struct
+static void agregarEntrenamiento(DtSpinning *clase_entrenamiento){
+  arreglo_clases[tope_clases] = new Entrenamiento(clase_entrenamiento->getId(), //debug new
+                                                             clase_entrenamiento->getAnotados(),
+                                                             clase_entrenamiento->getNombre(),
+                                                             clase_entrenamiento->getTurno(),
+                                                             clase_entrenamiento->getenRambla());
 }
 void agregarClase(const DtClase &clase){                                //2
- tope_clases++;
+  DtClase *aux = &clase;
+  DtSpinning *es_spinning = dynamic_cast<DtSpinning *>(aux);
+  if (es_spinning){
+    agregarSpinning(aux);
+  }else{
+    agregarEntrenamiento(aux);
+  }
+  tope_clases++;
 }
 
 static bool es_valida_fecha(Fecha f){
@@ -106,7 +108,7 @@ void agregarInscripcion(int ciSocio, int idClase, Fecha fecha){         //3
   int i = 0;
   encontre = false;
   while(i < tope_socios && encontre = false){
-    if(arreglo_socios->getCI()){
+    if(arreglo_socios[i]->getCI() == ciSocio){
       encontre = true;
     }
     i++;
@@ -117,86 +119,92 @@ void agregarInscripcion(int ciSocio, int idClase, Fecha fecha){         //3
   encontre = false;
   i = 0;
   while(i < tope_socios && encontre = false){
-    if(arreglo_clases[i].info_clase->getId()){
+    if(arreglo_clases[i]->getId() == idClase){
       encontre = true;
     }
     i++;
   }
   i--; //idem antes
   //arreglo de clases, campo clase, arreglo inscripciones, en la posicion "anotados" se le asigna la inscripcion
-  arreglo_clases[i].info_clase->inscripciones[arreglo_clases[i].info_clase->getAnotados()] = inscripcion;
+  arreglo_clases[i]->inscripciones[arreglo_clases[i]->getAnotados()] = inscripcion;
   //la cantidad de anotados aumenta en uno
-  arreglo_clases[i].info_clase->setAnotados(arreglo_clases.info_clase->getAnotados() + 1);
+  arreglo_clases[i]->setAnotados(arreglo_clases->getAnotados() + 1);
 }
 
 void borrarInscripcion(int ciSocio, int idClase){                       //4
   bool encontre = false;
   int i = 0;
   while(i < tope_clases && encontre = false){                  // Busco la clase en arreglo_clases
-    if(arreglo_clases[i].info_clase->getId() == idClase){
+    if(arreglo_clases[i]->getId() == idClase){
       encontre = true;
     }
     i++;
   };
   i--;
-  Inscripcion *ins = arreglo_clases[i].info_clase->getInscripciones();     //CHEBI CHUPA PENE DEJAME HACER ESTO POR DIOS
-  int anotados = arreglo_clases[i].info_clase->getAnotados();
-  i = 0; //reutilizar variable
+  Inscripcion **ins = arreglo_clases[i]->getInscripciones();     //CHEBI CHUPA PENE DEJAME HACER ESTO POR DIOS
+  int j = 0; //reutilizar variable REUTILIZAME ESTA PUTO
   encontre = false;
-  while(i < anotados && encontre = false){                                  // Busco el socio entre los inscriptos
-    if(ins[i]->getSocio().getCI() == ciSocio){     //necesito el DataType socio del objeto apuntado por ins[i], una vez que lo tengo le aplico getCI DEBUG
+  while(j < anotados && encontre = false){                                  // Busco el socio entre los inscriptos
+    if(ins[j]->getSocio().getCI() == ciSocio){     //necesito el DataType socio del objeto apuntado por ins[i], una vez que lo tengo le aplico getCI DEBUG
       encontre = true;
     }
-    i++;
+    j++;
   };
-  i--;
-  ins[i] = ins[anotados-1]; //me traigo al ultimo para rellenar el lugar pero tengo inscriptos duplicados
-  ins[anotados-1] = NULL; //NO ESTOY SEGURO QUE SEA ASI ESTO....
-  arreglo_clases[i].info_clase->setAnotados(anotados-1);
+  j--;
+  arreglo_clases[i]->borrarInscripcion(j);
 }
 // La funcion anterior la implementé pensando que lo devuelto en getInscripciones es el arreglo de inscripciones original, cuando en realidad no lo hace.
 // No vi otra forma de hacerlo con las operaciones de clase.h . Otra forma que pensé es que la función agregarInscripcion tenga como parámetro agregar Inscripcion(posicion,inscripcion)
 // Y asi yo puedo elegir en que posicion del arreglo poner la inscripcion
 
-DtSocio **obtenerInfoSociosPorClase(int idClase, int &cantSocios){      //5
-
-
-}
-
-DtClase obtenerClase(int idCLase){                                      //6
-  DtClase res = DtClase();
-  bool encontre = false;
-  int i = 0;
-
-  while(i < tope_clases && encontre = false){
-    if(arreglo_clases[i]->info_clase->getId() == idClase){                 // Busco si está inscripta la clase
+DtSocio **obtenerInfoSociosPorClase(int idClase, int &cantSocios){ //5
+    int i = 0;
+    bool encontre = false;
+    while(i < tope_clases && encontre = false){
+    if(arreglo_clases[i]->getId() == idClase){                
       encontre = true;
     }
     i++;
   };
   i--;
+  Inscripcion** arreglo_ins = arreglo_clases[i]->getInscripciones();
+  int tope = arreglo_clases[i]->getAnotados();
+  DtSocio** res = new *DtSocio[cantSocios];
+  for(int j = 0; j < tope; j ++){
+    res[j] = new DtSocio(ins[j]->getSocio());
+  }
+  return res;
+}
 
-  if(encontre == true){                                                     // Si está inscripta
-    if(arreglo_clases[i].es_entrenamiento == true){                        // Si es entrenamiento
-      int idres = arreglo_clases[i].info_clase->getId();
-      int anotadosres = arreglo_clases[i].info_clase->getAnotados();
-      std::string nombreres = arreglo_clases[i].info_clase->getNombre();
-      Turno turnores = arreglo_clases[i].info_clase->getTurno();
-      Inscripcion *inscripcionres = arreglo_clases[i].info_clase->getInscripciones();
-      bool enRamblares = arreglo_clases[i].info_clase->getenRambla();
-      res = DtEntrenamiento(idres, anotadosres, nombreres, turnores, enRamblares);            // No tiene parametro inscripcion el constructor???
-
-    } else {
-                                                                                      // Si es spinning
-      int idres = arreglo_clases[i]->info_clase->getId();
-      int anotadosres = arreglo_clases[i]->info_clase->getAnotados();
-      std::string nombreres = arreglo_clases[i]->info_clase->getNombre();
-      Turno turnores = arreglo_clases[i]->info_clase->getTurno();
-      Inscripcion *inscripcionres = arreglo_clases[i]->info_clase->getInscripciones();
-      int cantbicicletasres = arreglo_clases[i]->info_clase->getcantBicicletas();
-      res = DtSpinning(idres, anotadosres, nombreres, turnores, cantbicicletasres);
+DtClase obtenerClase(int idCLase){                                      //6
+  bool encontre = false;
+  int i = 0;
+  while(i < tope_clases && encontre = false){
+    if(arreglo_clases[i]->getId() == idClase){                 // Busco si está inscripta la clase
+      encontre = true;
     }
+    i++;
   };
+  i--;
+  Clase *aux = arreglo_clases[i];
+  Entrenamiento *es_entrenamiento = dynamic_cast<Entrenamiento *>(aux);
+    if(es_entrenamiento){                        // Si es entrenamiento
+      int idres = arreglo_clases[i]->getId();
+      int anotadosres = arreglo_clases[i]->getAnotados();
+      std::string nombreres = arreglo_clases[i]->getNombre();
+      Turno turnores = arreglo_clases[i]->getTurno();
+      Inscripcion *inscripcionres = arreglo_clases[i]->getInscripciones();
+      bool enRamblares = arreglo_clases[i]->getenRambla();
+      DtEntrenamiento res = DtEntrenamiento(idres, anotadosres, nombreres, turnores, enRamblares);            // No tiene parametro inscripcion el constructor???
+    } else {
+      int idres = arreglo_clases[i]->getId();
+      int anotadosres = arreglo_clases[i]->getAnotados();
+      std::string nombreres = arreglo_clases[i]->getNombre();
+      Turno turnores = arreglo_clases[i]->getTurno();
+      Inscripcion *inscripcionres = arreglo_clases[i]->getInscripciones();
+      int cantbicicletasres = arreglo_clases[i]->getcantBicicletas();
+      DtSpinning res = DtSpinning(idres, anotadosres, nombreres, turnores, cantbicicletasres);
+    }
   return res;
 }
 
@@ -207,12 +215,23 @@ static void responder_entrada_invalida(int &entrada){
   std::cout << "Para registrar una clase de spinning presione 1. \n";
   std::cout << "Para registrar una clase de entrenamiento presione 2. \n";
   std::cout << "Para registrar una nueva clase de entrenamiento presione 2. \n";
-  std::cout << "Para registrar un nuevo socio presione 3. \n"
-  std::cout << "Para inscribir un socio existente a una clase existente presione 4. \n"
-  std::cout << "Para borrar una inscripcion de un socio de una clase presione 5. \n"
-  std::cout << "Para desplegar informacion sobre las clases ingresadas presione 6. \n"
+  std::cout << "Para registrar un nuevo socio presione 3. \n";
+  std::cout << "Para inscribir un socio existente a una clase existente presione 4. \n";
+  std::cout << "Para borrar una inscripcion de un socio de una clase presione 5. \n";
+  std::cout << "Para desplegar informacion sobre las clases ingresadas presione 6. \n";
+  std::cout << "Para desplegar todos los socios de una clase 7. \n";
+
   std::cout << "Para salir, presione 0. \n";
   std::cin >> entrada;
+}
+
+static void imprimir_socios(DtSocio **s, int tope) {
+    for(int i = 0; i < tope; i++) {
+        std::cout << " ====================== \n"
+        std::cout << "Nombre: " << s[i]->getNombre() << std::endl;
+        std::cout << "CI: " << s[i]->getCI() << std::endl;
+    }
+    std::cout << std::endl;
 }
 
 //-----------------------------------------------------------------------
@@ -227,10 +246,12 @@ int main(){
   while (execute){
     std::cout << "Para registrar una nueva clase de spinning presione 1. \n";
     std::cout << "Para registrar una nueva clase de entrenamiento presione 2. \n";
-    std::cout << "Para registrar un nuevo socio presione 3. \n"
-    std::cout << "Para inscribir un socio existente a una clase existente presione 4. \n"
-    std::cout << "Para borrar una inscripcion de un socio de una clase presione 5. \n"
-    std::cout << "Para desplegar informacion sobre las clases ingresadas presione 6. \n"
+    std::cout << "Para registrar un nuevo socio presione 3. \n";
+    std::cout << "Para inscribir un socio existente a una clase existente presione 4. \n";
+    std::cout << "Para borrar una inscripcion de un socio de una clase presione 5. \n";
+    std::cout << "Para desplegar informacion sobre las clases ingresadas presione 6. \n";
+    std::cout << "Para desplegar todos los socios de una clase 7. \n";
+
     std::cout << "Para salir, presione 0. \n";
 
     std::cin >> entrada;
@@ -239,27 +260,26 @@ int main(){
       case 1:{
         std::cout << "Ingresaremos una clase de spinning. \n";
         try{
-          std::cout << "Ingrese el Id de la clase"
+          std::cout << "Ingrese el Id de la clase. \n";
           std::cin >> identificacion_spinning;
           if (existe_clase(identificacion_spinning)){
-            std::std::cin.clear(); //resetea las flags de error
-            std::std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); //ignora toda la entrada invalida
+            std::cin.clear(); //resetea las flags de error
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); //ignora toda la entrada invalida
             throw std::invalid_argument("La clase que se desea ingresar ya existe en el sistema"); //tira la excepcion
           }
-          std::cout << "Ingrese el nombre de la clase. \n"
+          std::cout << "Ingrese el nombre de la clase. \n";
           std::cin >> nombre_clase_spinning;
-          std::cout << "Ingrese el turno en el cual se desarrolla la clase. \n"
+          std::cout << "Ingrese el turno en el cual se desarrolla la clase. \n";
           std::cin >> turno_clase_spinning;
           std::cout << "Ingrese la cantidad de bicicletas con las que cuenta la clase: \n";
           std::cin >> cantidad_bicicletas;
           if (cantidad_bicicletas > 50){
-            std::std::cin.clear(); //resetea las flags de error
-            std::std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); //ignora toda la entrada invalida
+            std::cin.clear(); //resetea las flags de error
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); //ignora toda la entrada invalida
             throw std::invalid_argument("No se puede ingresar un numero de bicicletas mayor a 50"); //tira la excepcion
           }
           DtClase *clase_spinning_ains = new DtSpinning(identificacion_spinning, nombre_clase_spinning,
                                                         turno_clase_spinning, cantidad_bicicletas);
-          agregarSpinning(clase_spinning_ains);
           agregarClase(clase_spinning_ains);
           std::cout << "Clase ingresada exitosamente. \n";
 
@@ -270,16 +290,16 @@ int main(){
       case 2:{
         std::cout << "Ingresaremos una clase de entrenamiento." << std::endl;
         try{
-          std::cout << "Ingrese el Id de la clase"
+          std::cout << "Ingrese el Id de la clase. \n";
           std::cin >> identificacion_entrenamiento;
           if (existe_clase(identificacion_entrenamiento)){
-            std::std::cin.clear(); //resetea las flags de error
-            std::std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); //ignora toda la entrada invalida
+            std::cin.clear(); //resetea las flags de error
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); //ignora toda la entrada invalida
             throw(std::invalid_argument("La clase que se desea ingresar ya existe en el sistema")); //tira la excepcion
           }
-          std::cout << "Ingrese el nombre de la clase. \n"
+          std::cout << "Ingrese el nombre de la clase. \n";
           std::cin >> nombre_clase_entrenamiento;
-          std::cout << "Ingrese el turno en el cual se desarrolla la clase. \n"
+          std::cout << "Ingrese el turno en el cual se desarrolla la clase. \n";
           std::cin >> turno_clase_entrenamiento;
           std::cout << "Ingrese si la clase se desarrolla en la rambla. \n";
           std::cin >> clase_en_rambla;
@@ -300,11 +320,11 @@ int main(){
           std::cout << "Ingrese la cedula de identidad del socio. \n";
           std::cin >> cedula_socio;
           if (existe_socio(cedula_socio)){
-            std::std::cin.clear(); //resetea las flags de error
-            std::std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); //ignora toda la entrada invalida hasta el fin de linea
+            std::cin.clear(); //resetea las flags de error
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); //ignora toda la entrada invalida hasta el fin de linea
             throw(std::invalid_argument("El socio ya se encuentra registrado")); //tira la excepcion
           }
-          std::cout << "Ingrese el nombre del socio. \n"
+          std::cout << "Ingrese el nombre del socio. \n";
           std::cin >> nombre_socio;
           agregarSocio(cedula_socio, nombre_socio);
           std::cout << "Socio registrado exitosamente" << std::endl;
@@ -313,7 +333,7 @@ int main(){
       }
       //inscribir socio a una clase
       case 4:{
-        std::cout << "Inscribiremos un socio a una clase";
+        std::cout << "Inscribiremos un socio a una clase. \n";
         try{
           std::cout << "Ingrese la cedula del socio a inscribir. \n";
           std::cin >> cedula_socio_ainscribir;
@@ -339,20 +359,20 @@ int main(){
       //falta levantar la excepcion por si el socio no se encuentra anotado
       //creo que es el unico uso que se le daria a obtenerInfoSociosPorClase
       case 5:{
-        std::cout << "Desincribiremos a un socio de una clase";
+        std::cout << "Desincribiremos a un socio de una clase. \n";
         try{
           std::cout << "Ingrese la cedula del socio a desinscribir. \n";
           std::cin >> cedula_socio_adesinscribir;
           if (!existe_socio(cedula_socio_adesinscribir)){
             throw(std::invalid_argument("El socio no esta registrado"));
           }
-          std::cout << "Ingrese el identificador de la clase a la que se desea inscribir. \n";
-          std::cin >> id_clase_aidesnscribir;
+          std::cout << "Ingrese el identificador de la clase a la que se desea desinscribir. \n";
+          std::cin >> id_clase_adesinscribir;
           if (!existe_clase(id_clase_adesinscribir)){
             throw(std::invalid_argument("La clase no esta registrada"));
           }
           borrarInscripcion(cedula_socio_adesinscribir, id_clase_adesinscribir);
-          std::cout << "Socio inscripto exitosamente";
+          std::cout << "Socio desinscripto exitosamente";
         }catch(const std::invalid_argument &ia) {responder_entrada_invalida(entrada)}
         break;
       }
@@ -366,16 +386,36 @@ int main(){
             throw(std::invalid_argument("La clase no esta registrada"));
           }
           std::cout << obtenerClase(id_clase_adesplegar) << std::endl; //cuidado como se sobrecarga para hacer esto valido
-          if (es_clase_entrenamiento(id_clase_adesplegar)){
-            if (obtenerClase(id_clase_adesplegar).getenRambla()){
-              std::cout << "En rambla: SI. \n";
-            } else {
-              std::cout << "En rambla: NO. \n";
-            }
-          }else{
-            std::cout << "Cantidad de bicicletas" << obtenerClase(id_clase_adesplegar).getcantBicicletas() << std::endl;
-          }
 
+          std::cout << "Informacion desplegada exitosamente. \n";
+        }catch(const std::invalid_argument &ia) {responder_entrada_invalida(entrada)}
+        break;
+      }
+      case 7:{
+        std::cout << "Desplegaremos los socios de la clase deseada. \n";
+        try{
+          std::cout << "Ingrese el identificador de la clase que desee. \n";
+          std::cin >> id_clase_adesplegar;
+          if (!existe_clase(id_clase_adesplegar)){
+            throw(std::invalid_argument("La clase no esta registrada"));
+          }
+            bool encontrado = false;
+            int k = 0;
+            while(i < tope_clases && encontrado = false){
+                if(arreglo_clases[k]->getId() == idClase){                 // Busco si está inscripta la clase
+                encontrado = true;
+                }
+                k++;
+            };
+            k--;
+          int cSocios = arreglo_clases[k]->getAnotados();
+          if(cSocios = 0)
+              std::cout << "La clase no tiene ningun socio inscripto. \n";
+          else {
+          DtSocio** socios_aimprimir = obtenerInfoSociosPorClase(id_clase_adesplegar,cSocios);
+          std::cout << "Los socios de la clase " << arreglo_clases[k]->getNombre() << " son: \n"; 
+          imprimir_socios(socios_aimprimir, cSocios);
+          }
           std::cout << "Informacion desplegada exitosamente. \n";
         }catch(const std::invalid_argument &ia) {responder_entrada_invalida(entrada)}
         break;
@@ -395,4 +435,4 @@ int main(){
 
 
   return 0;
-}
+  }

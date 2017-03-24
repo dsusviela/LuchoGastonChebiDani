@@ -9,11 +9,11 @@ Modulo de implementacion de class 'Entrenamiento'
 #include "../include/entrenamiento.h"
 #include "../include/inscripcion.h"
 
-Entrenamiento::Entrenamiento(int x,string s,Turno t,Inscripcion *i,bool b){
-	this->id = x;
-	this->nombre = s;
-	this->turno = t;
-	//this->inscriptos = i ?
+Entrenamiento::Entrenamiento(int x,int a,std::string s,Turno t,Inscripcion **i,bool b) : Clase(x,a,s,t,i){
+	this->enRambla = b;
+}
+
+Entrenamiento::Entrenamiento(int x,std::string s,Turno t,bool b) : Clase(x,s,t){
 	this->enRambla = b;
 }
 

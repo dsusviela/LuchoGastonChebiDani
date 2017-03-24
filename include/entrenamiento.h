@@ -16,7 +16,8 @@ class Entrenamiento : public Clase{
   private:
     bool enRambla;
   public:
-    Entrenamiento(int, int, std::string, Turno, bool); //id, nombre, turno, enRambla
+    Entrenamiento(int, int, std::string, Turno, Inscripcion**, bool); //id, nombre, turno, enRambla
+    Entrenamiento(int, std::string, Turno, bool);
     bool getenRambla();
     void setenRambla(bool);
     ~Entrenamiento();

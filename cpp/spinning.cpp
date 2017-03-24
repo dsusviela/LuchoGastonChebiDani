@@ -7,13 +7,15 @@ Modulo de implementacion de class 'Spinning'
 #include "../include/clase.h"
 #include "../include/inscripcion.h"
 #include "../include/spinning.h"
+#include "../include/DtSpinning.h"
 
-Spinning::Spinning(int i, int a, string s, Turno t, int cant){
-	this->id = i;
-	this->anotados = a;
-	this->nombre = s;
-	this->turno = t;
-	this->cantBicicletas = cant;
+
+Spinning::Spinning(int x,int a,std::string s,Turno t,Inscripcion **i,int c) : Clase(x,a,s,t,i){
+	this->cantBicicletas = c;
+}
+
+Spinning::Spinning(int x,std::string s,Turno t,int c) : Clase(x,s,t){
+	this->cantBicicletas = c;
 }
 
 int Spinning::getcantBicicletas(){
@@ -26,4 +28,18 @@ void Spinning::setcantBicicletas(int cant){
 
 int Spinning :: cupo(){
   return cantBicicletas-anotados;
+}
+
+/*implementacion alternativa:
+ * DtSpining Spinning::getData() { 
+ *  DtSpinning res = DtSpinning(this->DtClase::getData());
+ *  setcantBicicletas(getcantBicicletas);
+ *  return res;
+ * }
+ *
+ * estoy 93% seguro que esto anda
+ */
+
+DtSpining Spinning::getData(){
+  return DtSpining(getID(), getAnotados(), getNombre(), getTurno(), getInscripcion(), getcantBicicletas());  
 }

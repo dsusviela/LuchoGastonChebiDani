@@ -9,6 +9,24 @@ Modulo de implementacion de class 'Clase'
 #include "../include/clase.h"
 #include "../include/inscripcion.h"
 
+/*Constructor*/
+
+Clase::Clase(int ident, int ano, std::string nome, Turno turn, Inscripcion **i){
+    this->id = ident;
+    this->anotados = ano;
+    this->nombre = nome;
+    this->turno = turn;
+    this->inscripciones = i;
+}
+
+Clase::Clase(int ident, std::string nome, Turno turn){
+    this->id = ident;
+    this->anotados = 0;
+    this->nombre = nome;
+    this->turno = turn;
+    this->inscripciones = new *Inscripcion[50];
+}
+
 /* Getters */
 int Clase::getId(){
   return this->id;
@@ -26,12 +44,8 @@ Turno Clase::getTurno(){
   return this->turno;
 }
 
-Inscripcion* Clase::getInscripciones(){
-  Inscripcion* inscrip[50];
-  for(int j = 0; j < 50; j++) {
-    this->inscripciones[j] = inscrip[j];
-  }
-  return inscrip;
+Inscripcion ** Clase::getInscripciones(){
+  return this->inscripciones;
 }
 
 DtClase Clase::getData(){
@@ -52,10 +66,15 @@ void Clase::setTurno(Turno t){
 }
 
 /* Funcionalidad */
-void Clase::agregarInscripcion(Inscripcion inscrip) {
+void Clase::agregarInscripcion(Inscripcion *inscrip) {
   this->inscripciones[this->anotados] = inscrip;
   this->anotados++;
 }
+
+void Clase::borrarInscripcion(int pos){
+    delete this->inscripciones[pos];
+    this->inscripciones[pos] = this->inscripciones[this->anotados];
+    this->anotados--;
 
 /* Destructor */
 Clase::~Clase(){};

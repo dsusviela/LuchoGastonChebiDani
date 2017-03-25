@@ -170,7 +170,6 @@ DtSocio **obtenerInfoSociosPorClase(int idClase, int &cantSocios) { //5
 
 DtClase obtenerClase(int idClase) {                                      //6
   bool encontre = false;
-  DtClase res;
   int i = 0;
   while (i < tope_clases && encontre == false) {
     if (arreglo_clases[i]->getId() == idClase) { // Busco si está inscripta la clase
@@ -189,7 +188,7 @@ DtClase obtenerClase(int idClase) {                                      //6
     Turno turnores = arreglo_clases[i]->getTurno();
 
     bool enRamblares = es_entrenamiento->getenRambla();
-    DtEntrenamiento res = DtEntrenamiento(idres, /*anotadosres,*/ nombreres, turnores, enRamblares);
+    return DtEntrenamiento(idres, /*anotadosres,*/ nombreres, turnores, enRamblares);
   } else {
     int idres = arreglo_clases[i]->getId();
   //  int anotadosres = arreglo_clases[i]->getAnotados();
@@ -197,10 +196,9 @@ DtClase obtenerClase(int idClase) {                                      //6
     Turno turnores = arreglo_clases[i]->getTurno();
 
     int cantbicicletasres = es_spinning->getcantBicicletas();
-    DtSpinning res = DtSpinning(idres, /*anotadosres,*/ nombreres, turnores,
+    return DtSpinning(idres, /*anotadosres,*/ nombreres, turnores,
         cantbicicletasres);
   }
-  return res;
 }
 
 //IMPORTANTE PARA CIN, SE USA SOLO PARA INTEGERS
@@ -255,7 +253,6 @@ int main() {
     std::cout << "Para borrar una inscripcion de un socio de una clase presione 5. \n";
     std::cout << "Para desplegar informacion sobre las clases ingresadas presione 6. \n";
     std::cout << "Para desplegar todos los socios de una clase 7. \n";
-
     std::cout << "Para salir, presione 0. \n";
 
     std::cin >> entrada;
@@ -268,7 +265,7 @@ int main() {
         std::cin >> identificacion_spinning;
         if (existe_clase (identificacion_spinning)) {
           std::cin.clear(); //resetea las flags de error
-          throw std::invalid_argument("La clase que se desea ingresar ya existe en el sistema"); //tira la excepcion
+          throw(std::invalid_argument("La clase que se desea ingresar ya existe en el sistema")); //tira la excepcion
         }
         std::cout << "Ingrese el nombre de la clase. \n";
         std::cin.ignore();
@@ -281,7 +278,7 @@ int main() {
         std::cin >> cantidad_bicicletas;
         if (cantidad_bicicletas > 50) {
           std::cin.clear(); //resetea las flags de error
-          throw std::invalid_argument("No se puede ingresar un numero de bicicletas mayor a 50"); //tira la excepcion
+          throw (std::invalid_argument("No se puede ingresar un numero de bicicletas mayor a 50")); //tira la excepcion
         }
         DtSpinning clase_spinning_ains = DtSpinning(identificacion_spinning, nombre_clase_spinning,
                                                     turno_clase_spinning, cantidad_bicicletas);
@@ -372,27 +369,27 @@ int main() {
     //creo que es el unico uso que se le daria a obtenerInfoSociosPorClase
     case 5:
     {
-      std::cout << "Desincribiremos a un socio de una clase. \n";
+      std::cout << "Borraremos a un socio de una clase. \n";
       try {
-        std::cout << "Ingrese la cedula del socio a desinscribir. \n";
+        std::cout << "Ingrese la cedula del socio. \n";
         std::cin >> cedula_socio_adesinscribir;
         if (!existe_socio(cedula_socio_adesinscribir)) {
           std::cin.clear(); //resetea las flags de error
           throw(std::invalid_argument("El socio no esta registrado"));
         }
-        std::cout << "Ingrese el identificador de la clase a la que se desea desinscribir. \n";
+        std::cout << "Ingrese el identificador de la clase. \n";
         std::cin >> id_clase_adesinscribir;
         if (!existe_clase(id_clase_adesinscribir)) {
           std::cin.clear(); //resetea las flags de error
           throw(std::invalid_argument("La clase no esta registrada"));
         }
         borrarInscripcion(cedula_socio_adesinscribir, id_clase_adesinscribir);
-        std::cout << "Socio desinscripto exitosamente. \n";
+        std::cout << "Socio borrado de la clase exitosamente. \n";
       } catch (const std::invalid_argument &ia) { responder_entrada_invalida(entrada); }
       break;
     }
     //desplegar informacion, no se hasta que punto podemos sobrecargar el operador
-/*    case 6:
+    case 6:
     {
       std::cout << "Desplegaremos la informacion de la clase deseada. \n";
       try {
@@ -402,7 +399,16 @@ int main() {
           std::cin.clear(); //resetea las flags de error
           throw(std::invalid_argument("La clase no esta registrada"));
         }
-        std::cout << obtenerClase(id_clase_adesplegar);
+        DtClase aux = obtenerClase(id_clase_adesplegar);
+        DtClase *aimprimir = &aux;
+        DtSpinning *imprimir_spinning = dynamic_cast<DtSpinning *>(aimprimir);
+        DtEntrenamiento *imprimir_entrenamiento = dynamic_cast<DtEntrenamiento *>(aimprimir);
+        if(imprimir_spinning){
+          std::cout << imprimir_spinning->getcantBicicletas() << "\n";
+          std::cout << imprimir_spinning << "\n";
+        } else {
+          std::cout << imprimir_entrenamiento << "\n";
+        }
         std::cout << std::endl; //por las dudas del sobrecargado
         std::cout << "Informacion desplegada exitosamente. \n";
       } catch (const std::invalid_argument &ia) {
@@ -411,7 +417,7 @@ int main() {
       break;
     }
     //desplegar todos los socios de una clase
-    */case 7:
+    case 7:
     {
       std::cout << "Desplegaremos los socios de la clase deseada. \n";
       try {

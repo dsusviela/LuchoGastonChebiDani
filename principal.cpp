@@ -32,6 +32,7 @@ int tope_socios = 0;
 Clase *arreglo_clases[MAX_CLASES];
 int tope_clases = 0;
 
+bool global_spinning = false;
 //funciones a implementar con sus axuliares
 
 static bool existe_socio(int ci) {
@@ -168,7 +169,7 @@ DtSocio **obtenerInfoSociosPorClase(int idClase, int &cantSocios) { //5
   return res;
 }
 
-DtClase obtenerClase(int idClase) {                                      //6
+DtClase *obtenerClase(int idClase) {                                      //6
   bool encontre = false;
   int i = 0;
   while (i < tope_clases && encontre == false) {
@@ -188,7 +189,9 @@ DtClase obtenerClase(int idClase) {                                      //6
     Turno turnores = arreglo_clases[i]->getTurno();
 
     bool enRamblares = es_entrenamiento->getenRambla();
-    return DtEntrenamiento(idres, /*anotadosres,*/ nombreres, turnores, enRamblares);
+    DtEntrenamiento *res = new DtEntrenamiento(idres, /*anotadosres,*/ nombreres, turnores, enRamblares);
+    global_spinning = true;
+    return res;
   } else {
     int idres = arreglo_clases[i]->getId();
   //  int anotadosres = arreglo_clases[i]->getAnotados();
@@ -196,8 +199,10 @@ DtClase obtenerClase(int idClase) {                                      //6
     Turno turnores = arreglo_clases[i]->getTurno();
 
     int cantbicicletasres = es_spinning->getcantBicicletas();
-    return DtSpinning(idres, /*anotadosres,*/ nombreres, turnores,
+    DtSpinning *res = new DtSpinning(idres, /*anotadosres,*/ nombreres, turnores,
         cantbicicletasres);
+    global_spinning = false;
+    return res;
   }
 }
 
@@ -399,15 +404,17 @@ int main() {
           std::cin.clear(); //resetea las flags de error
           throw(std::invalid_argument("La clase no esta registrada"));
         }
-        DtClase aux = obtenerClase(id_clase_adesplegar);
-        DtClase *aimprimir = &aux;
-        DtSpinning *imprimir_spinning = dynamic_cast<DtSpinning *>(aimprimir);
-        DtEntrenamiento *imprimir_entrenamiento = dynamic_cast<DtEntrenamiento *>(aimprimir);
-        if(imprimir_spinning){
-          std::cout << imprimir_spinning->getcantBicicletas() << "\n";
-          std::cout << imprimir_spinning << "\n";
-        } else {
-          std::cout << imprimir_entrenamiento << "\n";
+        DtClase *clase = obtenerClase(id_clase_adesplegar);
+        //dynamic cast no le anda sin puntero. No puedo hacer puntero a algo cosnt y se me arma bardo si paso todo a const
+        DtSpinning *es_spinning = dynamic_cast<DtSpinning *>(clase);
+        DtEntrenamiento *es_entrenamiento = dynamic_cast<DtEntrenamiento *>(clase);
+        if(es_spinning){
+          std::cout << (*es_spinning) << "\n";
+          delete clase;
+        }
+        if(es_entrenamiento) {
+          std::cout << (*es_entrenamiento) << "\n";
+          delete clase;
         }
         std::cout << std::endl; //por las dudas del sobrecargado
         std::cout << "Informacion desplegada exitosamente. \n";

@@ -37,11 +37,11 @@ int DtSpinning::cupo() {
 }
 
 /* Funcionalidad */
-std::ostream& operator << (std::ostream& o, DtSpinning* dt) {
-  o << "ID Clase: " << dt->getId() << "\n";
-  o << "Nombre: " << dt->getNombre() << "\n";
-  o << "Turno: " << dt->getTurno() << "\n";
-  o << "Cantidad de bicicletas: " << dt->getcantBicicletas() << "\n";
+std::ostream& operator << (std::ostream& o, DtSpinning &dt) {
+  o << "ID Clase: " << dt.getId() << "\n";
+  o << "Nombre: " << dt.getNombre() << "\n";
+  o << "Turno: " << dt.getTurno() << "\n";
+  o << "Cantidad de bicicletas: " << dt.getcantBicicletas() << "\n";
   return o;
 }
 

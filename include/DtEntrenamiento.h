@@ -21,7 +21,7 @@ public:
   ~DtEntrenamiento();
   virtual int cupo();
   //virtual std::ostream& operator<<(std::ostream&, const DtEntrenamiento&);
-  friend std::ostream& operator<<(std::ostream&, DtEntrenamiento& dt);
+  friend std::ostream& operator<<(std::ostream&, DtEntrenamiento &dt);
 };
 
 

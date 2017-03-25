@@ -34,11 +34,11 @@ int DtEntrenamiento::cupo() {
   else
     return 10 - this->getAnotados();
 }
-std::ostream& operator<<(std::ostream& o, DtEntrenamiento* dt) {
-  o << "ID Clase: " << dt->getId() << "\n.";
-  o << "Nombre: " << dt->getNombre() << "\n.";
-  o << "Turno: " << dt->getTurno() << "\n.";
-  if (dt->getenRambla())
+std::ostream& operator<<(std::ostream& o, DtEntrenamiento &dt) {
+  o << "ID Clase: " << dt.getId() << "\n.";
+  o << "Nombre: " << dt.getNombre() << "\n.";
+  o << "Turno: " << dt.getTurno() << "\n.";
+  if (dt.getenRambla())
     o << "En rambla: Si" << "\n.";
   else
     o << "En rambla: No" << "\n.";

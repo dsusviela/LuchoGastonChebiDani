@@ -62,5 +62,4 @@ void DtClase::setTurno(Turno t) {
 
 /* Destructor */
 DtClase::~DtClase() {
-}
-;
+};

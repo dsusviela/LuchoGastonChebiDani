@@ -9,6 +9,7 @@
 #include "../include/spinning.h"
 #include "../include/DtSpinning.h"
 
+/*Constructores*/
 Spinning::Spinning(int x, int a, std::string s, Turno t, Inscripcion **i, int c) :
     Clase(x, a, s, t, i) {
   this->cantBicicletas = c;
@@ -19,16 +20,17 @@ Spinning::Spinning(int x, std::string s, Turno t, int c) :
   this->cantBicicletas = c;
 }
 
+/*Getters*/
 int Spinning::getcantBicicletas() {
   return this->cantBicicletas;
 }
-
+/*Setters*/
 void Spinning::setcantBicicletas(int cant) {
   this->cantBicicletas = cant;
 }
-
+/*Funcionalidad*/
 int Spinning::cupo() {
   return cantBicicletas - this->getAnotados();
 }
-
+/*Destructora*/
 Spinning::~Spinning(){}

@@ -22,10 +22,7 @@
 #define MAX_SOCIOS 1000
 #define MAX_CLASES 500
 
-//el que se quiera animar al Dynamic Cast
-//http://stackoverflow.com/questions/2253168/dynamic-cast-and-static-cast-in-c
-//pero que lo haga en otra branch, yo no entendi nada....
-
+//Definicion de variables globales
 Socio *arreglo_socios[MAX_SOCIOS];
 int tope_socios = 0;
 
@@ -33,8 +30,8 @@ Clase *arreglo_clases[MAX_CLASES];
 int tope_clases = 0;
 
 bool global_spinning = false;
-//funciones a implementar con sus axuliares
 
+//funciones a implementar con sus axuliares
 static bool existe_socio(int ci) {
   bool encontre = false;
   int i = 0;
@@ -76,10 +73,9 @@ static void agregarEntrenamiento(DtEntrenamiento *clase_entrenamiento) {
       clase_entrenamiento->getNombre(), clase_entrenamiento->getTurno(),
       clase_entrenamiento->getenRambla());
 }
-//el posta tiene el header con const DtClase &clase pero no anda si le dejo el const
-void agregarClase(DtClase &clase) {                                //2
+
+void agregarClase(DtClase &clase) {                                          //2
   DtClase *aux = &clase;
-  //dynamic cast no le anda sin puntero. No puedo hacer puntero a algo cosnt y se me arma bardo si paso todo a const
   DtSpinning *es_spinning = dynamic_cast<DtSpinning *>(aux);
   DtEntrenamiento *es_entrenamiento = dynamic_cast<DtEntrenamiento *>(aux);
   if (es_spinning) {
@@ -104,7 +100,7 @@ static bool es_valida_fecha(Fecha f) {
   return res;
 }
 
-void agregarInscripcion(int ciSocio, int idClase, Fecha fecha) {         //3
+void agregarInscripcion(int ciSocio, int idClase, Fecha fecha) {             //3
   int i = 0;
   bool encontre = false;
   while (i < tope_socios && encontre == false) {
@@ -127,10 +123,10 @@ void agregarInscripcion(int ciSocio, int idClase, Fecha fecha) {         //3
   arreglo_clases[i]->agregarInscripcion(inscripcion);
 }
 
-void borrarInscripcion(int ciSocio, int idClase) {                       //4
+void borrarInscripcion(int ciSocio, int idClase) {                           //4
   bool encontre = false;
   int i = 0;
-  while (i < tope_clases && encontre == false) { // Busco la clase en arreglo_clases
+  while (i < tope_clases && encontre == false) {
     if (arreglo_clases[i]->getId() == idClase) {
       encontre = true;
     }
@@ -140,8 +136,8 @@ void borrarInscripcion(int ciSocio, int idClase) {                       //4
   Inscripcion **ins = arreglo_clases[i]->getInscripciones();
   int j = 0;
   encontre = false;
-  while (j < arreglo_clases[i]->getAnotados() && encontre == false) { // Busco el socio entre los inscriptos
-    if (ins[j]->getSocio().getCI() == ciSocio) { //necesito el DataType socio del objeto apuntado por ins[i], una vez que lo tengo le aplico getCI DEBUG
+  while (j < arreglo_clases[i]->getAnotados() && encontre == false) {
+    if (ins[j]->getSocio().getCI() == ciSocio) {
       encontre = true;
     }
     j++;
@@ -150,7 +146,7 @@ void borrarInscripcion(int ciSocio, int idClase) {                       //4
   arreglo_clases[i]->borrarInscripcion(j);
 }
 
-DtSocio **obtenerInfoSociosPorClase(int idClase, int &cantSocios) { //5
+DtSocio **obtenerInfoSociosPorClase(int idClase, int &cantSocios) {          //5
   int i = 0;
   bool encontre = false;
   while (i < tope_clases && encontre == false) {
@@ -169,11 +165,11 @@ DtSocio **obtenerInfoSociosPorClase(int idClase, int &cantSocios) { //5
   return res;
 }
 
-DtClase *obtenerClase(int idClase) {                                      //6
+DtClase *obtenerClase(int idClase) {                                          //6
   bool encontre = false;
   int i = 0;
   while (i < tope_clases && encontre == false) {
-    if (arreglo_clases[i]->getId() == idClase) { // Busco si está inscripta la clase
+    if (arreglo_clases[i]->getId() == idClase) {
       encontre = true;
     }
     i++;
@@ -182,36 +178,29 @@ DtClase *obtenerClase(int idClase) {                                      //6
   Clase *aux = arreglo_clases[i];
   Entrenamiento *es_entrenamiento = dynamic_cast<Entrenamiento *>(aux);
   Spinning *es_spinning = dynamic_cast<Spinning *>(aux);
-  if (es_entrenamiento) {                        // Si es entrenamiento
+  if (es_entrenamiento) {
     int idres = arreglo_clases[i]->getId();
-//    int anotadosres = arreglo_clases[i]->getAnotados();
     std::string nombreres = arreglo_clases[i]->getNombre();
     Turno turnores = arreglo_clases[i]->getTurno();
 
     bool enRamblares = es_entrenamiento->getenRambla();
-    DtEntrenamiento *res = new DtEntrenamiento(idres, /*anotadosres,*/ nombreres, turnores, enRamblares);
+    DtEntrenamiento *res = new DtEntrenamiento(idres, nombreres, turnores, enRamblares);
     global_spinning = true;
     return res;
   } else {
     int idres = arreglo_clases[i]->getId();
-  //  int anotadosres = arreglo_clases[i]->getAnotados();
     std::string nombreres = arreglo_clases[i]->getNombre();
     Turno turnores = arreglo_clases[i]->getTurno();
 
     int cantbicicletasres = es_spinning->getcantBicicletas();
-    DtSpinning *res = new DtSpinning(idres, /*anotadosres,*/ nombreres, turnores,
+    DtSpinning *res = new DtSpinning(idres, nombreres, turnores,
         cantbicicletasres);
     global_spinning = false;
     return res;
   }
 }
 
-//IMPORTANTE PARA CIN, SE USA SOLO PARA INTEGERS
-//PARA STRINGS USAMOS GETLINE
-//esto es porque cin lee solo hasta el primer espacio, entonces si yo quiero ingresar
-//un nombre de un socio "nombre apellido", cin registra solo el nombre.
-
-//auxiliar para el main
+//auxiliares para el main
 static void responder_entrada_invalida(int &entrada) {
   std::cout << "Lo sentimos, lo ingresado no fue una entrada valida, intente de nuevo. \n";
 }
@@ -237,7 +226,7 @@ int main() {
 
   int identificacion_spinning, identificacion_entrenamiento, cantidad_bicicletas,
     cedula_socio, cedula_socio_ainscribir, id_clase_ainscribir, dia, mes, year,
-    cedula_socio_adesinscribir, id_clase_adesinscribir, id_clase_adesplegar /*id_clase_adesplegar*/;
+    cedula_socio_adesinscribir, id_clase_adesinscribir, id_clase_adesplegar;
 
   Turno turno_clase_spinning, turno_clase_entrenamiento;
   std::map<std::string, Turno> m;
@@ -291,6 +280,7 @@ int main() {
       std::cout << "Clase ingresada exitosamente. \n";
     } catch (const std::invalid_argument &ia) {
       responder_entrada_invalida(entrada);
+      std::cerr << ia.what() << std::endl;
     }
       break;
     }
@@ -313,10 +303,14 @@ int main() {
         turno_clase_entrenamiento = m[taux_entrenamiento];
         std::cout << "Ingrese si la clase se desarrolla en la rambla: 1 para Si o 0 para no. \n";
         std::cin >> clase_en_rambla;
-        DtEntrenamiento clase_entrenamiento_ains = DtEntrenamiento(identificacion_entrenamiento, nombre_clase_entrenamiento, turno_clase_entrenamiento, clase_en_rambla);
+        DtEntrenamiento clase_entrenamiento_ains = DtEntrenamiento(identificacion_entrenamiento, nombre_clase_entrenamiento,
+                                                                    turno_clase_entrenamiento, clase_en_rambla);
         agregarClase(clase_entrenamiento_ains);
         std::cout << "Clase ingresada exitosamente." << std::endl;
-      } catch(const std::invalid_argument &ia) {responder_entrada_invalida(entrada);}
+      } catch(const std::invalid_argument &ia) {
+        responder_entrada_invalida(entrada);
+        std::cerr << ia.what() << std::endl;
+      }
       break;
     }
     //nuevo socio
@@ -335,7 +329,10 @@ int main() {
         std::getline(std::cin, nombre_socio);
         agregarSocio(cedula_socio, nombre_socio);
         std::cout << "Socio registrado exitosamente" << std::endl;
-      } catch (const std::invalid_argument &ia) { responder_entrada_invalida(entrada); }
+      } catch (const std::invalid_argument &ia) {
+        responder_entrada_invalida(entrada);
+        std::cerr << ia.what() << std::endl;
+      }
       break;
     }
     //inscribir socio a una clase
@@ -347,31 +344,44 @@ int main() {
         std::cin >> cedula_socio_ainscribir;
         std::cin.clear();
         if (!existe_socio(cedula_socio_ainscribir)) {
+          std::cin.clear();
           throw(std::invalid_argument("El socio no esta registrado"));
         }
-        std::cout
-            << "Ingrese el identificador de la clase a la que se desea inscribir. \n";
+        std::cout << "Ingrese el numero identificador de la clase a la que se desea inscribir. \n";
         std::cin >> id_clase_ainscribir;
+        int i = 0;
+        bool encontre = false;
+        while (i < tope_clases && encontre == false) {
+          if (arreglo_clases[i]->getId() == id_clase_ainscribir) {
+            encontre = true;
+          }
+          i++;
+        };
+        i--;
+        if (arreglo_clases[i]->cupo() == 0){
+          std::cin.clear();
+          throw(std::invalid_argument("La clase esta llena"));
+        }
         std::cin.clear();
         if (!existe_clase(id_clase_ainscribir)) {
+          std::cin.clear();
           throw(std::invalid_argument("La clase no esta registrada"));
         }
         std::cout << "Ingrese la fecha de inscripcion. Dia Mes Year. \n";
         std::cin >> dia >> mes >> year;
         Fecha fecha_inscripcion = Fecha(dia, mes, year);
-        if (es_valida_fecha(fecha_inscripcion)) {
+        if (!es_valida_fecha(fecha_inscripcion)) {
           std::cin.clear(); //resetea las flags de error
           throw(std::invalid_argument("La fecha no es valida"));
         }
-        agregarInscripcion(cedula_socio_ainscribir, id_clase_ainscribir,
-            fecha_inscripcion);
+        agregarInscripcion(cedula_socio_ainscribir, id_clase_ainscribir, fecha_inscripcion);
         std::cout << "Socio inscripto exitosamente. \n";
-      } catch (const std::invalid_argument &ia) { responder_entrada_invalida(entrada); }
+      } catch (const std::invalid_argument &ia) {
+        responder_entrada_invalida(entrada);
+        std::cerr << ia.what() << std::endl;      }
       break;
     }
     //desinscribir socio de clase
-    //falta levantar la excepcion por si el socio no se encuentra anotado
-    //creo que es el unico uso que se le daria a obtenerInfoSociosPorClase
     case 5:
     {
       std::cout << "Borraremos a un socio de una clase. \n";
@@ -390,10 +400,13 @@ int main() {
         }
         borrarInscripcion(cedula_socio_adesinscribir, id_clase_adesinscribir);
         std::cout << "Socio borrado de la clase exitosamente. \n";
-      } catch (const std::invalid_argument &ia) { responder_entrada_invalida(entrada); }
+      } catch (const std::invalid_argument &ia) {
+        responder_entrada_invalida(entrada);
+        std::cerr << ia.what() << std::endl;
+      }
       break;
     }
-    //desplegar informacion, no se hasta que punto podemos sobrecargar el operador
+    //desplegar informacion
     case 6:
     {
       std::cout << "Desplegaremos la informacion de la clase deseada. \n";
@@ -405,7 +418,6 @@ int main() {
           throw(std::invalid_argument("La clase no esta registrada"));
         }
         DtClase *clase = obtenerClase(id_clase_adesplegar);
-        //dynamic cast no le anda sin puntero. No puedo hacer puntero a algo cosnt y se me arma bardo si paso todo a const
         DtSpinning *es_spinning = dynamic_cast<DtSpinning *>(clase);
         DtEntrenamiento *es_entrenamiento = dynamic_cast<DtEntrenamiento *>(clase);
         if(es_spinning){
@@ -420,6 +432,7 @@ int main() {
         std::cout << "Informacion desplegada exitosamente. \n";
       } catch (const std::invalid_argument &ia) {
         responder_entrada_invalida(entrada);
+        std::cerr << ia.what() << std::endl;
       }
       break;
     }
@@ -455,6 +468,7 @@ int main() {
         std::cout << "Informacion desplegada exitosamente. \n";
       } catch (const std::invalid_argument &ia) {
         responder_entrada_invalida(entrada);
+        std::cerr << ia.what() << std::endl;
       }
       break;
     }
@@ -467,7 +481,6 @@ int main() {
     }
     default:
     {
-      //responder_entrada_invalida(entrada);
       std::cout << "Lo sentimos, lo ingresado no fue una entrada valida, intente de nuevo. \n";
       break;
     }

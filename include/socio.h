@@ -14,8 +14,8 @@ private:
   int CI;
   std::string nombre;
 public:
-  Socio(); //no debería declararse esto acá?
-  Socio(int, std::string); //CI, nombre
+  Socio();
+  Socio(int, std::string); 
   int getCI();
   std::string getNombre();
   void setCI(int);

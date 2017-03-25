@@ -16,8 +16,7 @@ private:
   bool enRambla;
 public:
   Entrenamiento(int, int, std::string, Turno, Inscripcion**, bool);
-  Entrenamiento(int = 1, std::string = "No se introdujo nombre", Turno = Manana,
-      bool = false);
+  Entrenamiento(int = 1, std::string = "No se introdujo nombre", Turno = Manana, bool = false);
   bool getenRambla();
   void setenRambla(bool);
   ~Entrenamiento();

@@ -1,5 +1,6 @@
 /*
  Modulo de defincion de enum 'Turno'
+ En serio.... tiene su .h
  */
 
 #ifndef _CLASS_TURNO_H

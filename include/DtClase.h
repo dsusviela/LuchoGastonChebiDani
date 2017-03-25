@@ -32,7 +32,6 @@ public:
   void setId(int);
   void setNombre(std::string);
   void setTurno(Turno);
-//  virtual std::ostream& operator<<(std::ostream& o, const DtClase& dt) = 0;
   virtual ~DtClase() = 0;
 };
 

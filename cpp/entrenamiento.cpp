@@ -9,6 +9,7 @@
 #include "../include/entrenamiento.h"
 #include "../include/inscripcion.h"
 
+/*Constructoras*/
 Entrenamiento::Entrenamiento(int x, int a, std::string s, Turno t, Inscripcion **i, bool b) : Clase(x, a, s, t, i) {
   this->enRambla = b;
 }
@@ -18,14 +19,17 @@ Entrenamiento::Entrenamiento(int x, std::string s, Turno t, bool b) :
   this->enRambla = b;
 }
 
+/*Getters*/
 bool Entrenamiento::getenRambla() {
   return this->enRambla;
 }
 
+/*Setters*/
 void Entrenamiento::setenRambla(bool b) {
   this->enRambla = b;
 }
 
+/*Funcionalidad*/
 int Entrenamiento::cupo() {
   if (enRambla)
     return 20 - this->getAnotados();
@@ -33,4 +37,5 @@ int Entrenamiento::cupo() {
     return 10 - this->getAnotados();
 }
 
+/*Destructora*/
 Entrenamiento::~Entrenamiento(){}

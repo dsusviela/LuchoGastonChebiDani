@@ -6,12 +6,12 @@
 #include <iostream>
 
 #include "../include/inscripcion.h"
-
+/*Constructora*/
 Inscripcion::Inscripcion(Fecha f, Socio *s) {
   this->fecha = f;
   this->socio = s;
 }
-
+/*Getters*/
 Fecha Inscripcion::getFecha() {
   return this->fecha;
 }
@@ -19,7 +19,7 @@ Fecha Inscripcion::getFecha() {
 DtSocio Inscripcion::getSocio() {
   return DtSocio(this->socio->getCI(), this->socio->getNombre());
 }
-
+/*Setters*/
 void Inscripcion::setFecha(Fecha f) {
   this->fecha = f;
 }

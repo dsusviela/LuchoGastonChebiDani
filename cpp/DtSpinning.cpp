@@ -10,13 +10,7 @@
 #include "../include/inscripcion.h"
 #include "../include/DtSpinning.h"
 
-/* Constructores */
-/*DtSpinning::DtSpinning(int x, int a, std::string s, Turno t, Inscripcion **i,
-    int c) :
-    Clase(x, a, s, t, i) {
-  this->cantBicicletas = c;
-}*/
-
+/*Constructor*/
 DtSpinning::DtSpinning(int x, std::string s, Turno t, int c) :
     DtClase(x, s, t) {
   this->cantBicicletas = c;
@@ -40,7 +34,20 @@ int DtSpinning::cupo() {
 std::ostream& operator << (std::ostream& o, DtSpinning &dt) {
   o << "ID Clase: " << dt.getId() << "\n";
   o << "Nombre: " << dt.getNombre() << "\n";
-  o << "Turno: " << dt.getTurno() << "\n";
+  switch (dt.getTurno()) {
+    case Manana:{
+      o << "Manana. \n";
+      break;
+    }
+    case Tarde:{
+      o << "Tarde. \n";
+      break;
+    }
+    case Noche:{
+      o << "Noche. \n";
+      break;
+    }
+  }
   o << "Cantidad de bicicletas: " << dt.getcantBicicletas() << "\n";
   return o;
 }

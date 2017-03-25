@@ -7,12 +7,14 @@
 
 #include "../include/fecha.h"
 
+/*Constructora*/
 Fecha::Fecha(int dia, int mes, int anio) {
   this->dia = dia;
   this->mes = mes;
   this->anio = anio;
 }
 
+/*Getters*/
 int Fecha::getDia() {
   return this->dia;
 }
@@ -24,7 +26,7 @@ int Fecha::getMes() {
 int Fecha::getAnio() {
   return this->anio;
 }
-
+/*Setters*/
 void Fecha::setDia(int d) {
   this->dia = d;
 }

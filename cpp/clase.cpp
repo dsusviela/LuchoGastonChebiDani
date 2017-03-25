@@ -10,8 +10,7 @@
 
 /*Constructor*/
 
-Clase::Clase(int ident, int ano, std::string nome, Turno turn,
-    Inscripcion **i) {
+Clase::Clase(int ident, int ano, std::string nome, Turno turn, Inscripcion **i) {
   this->id = ident;
   this->anotados = ano;
   this->nombre = nome;

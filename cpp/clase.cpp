@@ -68,7 +68,7 @@ void Clase::agregarInscripcion(Inscripcion *inscrip) {
 
 void Clase::borrarInscripcion(int pos) {
   delete this->inscripciones[pos];
-  this->inscripciones[pos] = this->inscripciones[this->anotados];
+  this->inscripciones[pos] = this->inscripciones[this->anotados - 1];
   this->anotados--;
 }
 

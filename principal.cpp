@@ -123,7 +123,7 @@ void agregarInscripcion(int ciSocio, int idClase, Fecha fecha) {             //3
   arreglo_clases[i]->agregarInscripcion(inscripcion);
 }
 
-void borrarInscripcion(int ciSocio, int idClase) {                           //4
+void borrarInscrip(int ciSocio, int idClase) {                           //4
   bool encontre = false;
   int i = 0;
   while (i < tope_clases && encontre == false) {
@@ -398,7 +398,7 @@ int main() {
           std::cin.clear(); //resetea las flags de error
           throw(std::invalid_argument("La clase no esta registrada"));
         }
-        borrarInscripcion(cedula_socio_adesinscribir, id_clase_adesinscribir);
+        borrarInscrip(cedula_socio_adesinscribir, id_clase_adesinscribir);
         std::cout << "Socio borrado de la clase exitosamente. \n";
       } catch (const std::invalid_argument &ia) {
         responder_entrada_invalida(entrada);

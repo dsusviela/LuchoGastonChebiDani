@@ -113,7 +113,7 @@ void agregarInscripcion(int ciSocio, int idClase, Fecha fecha) {             //3
   Inscripcion *inscripcion = new Inscripcion(fecha, arreglo_socios[i]);
   encontre = false;
   i = 0;
-  while (i < tope_socios && encontre == false) {
+  while (i < tope_clases && encontre == false) {
     if (arreglo_clases[i]->getId() == idClase) {
       encontre = true;
     }
